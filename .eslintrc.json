@@ -1,0 +1,65 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "plugins": [
+        "import",
+        "class-property"
+
+    ],
+    "extends": ["airbnb"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": 2,
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "class-methods-use-this": "warn",
+        "react/no-multi-comp": "off",
+        "import/prefer-default-export": "off",
+        "react/prefer-stateless-function": "off",
+        "react/require-default-props": "off",
+        "import/no-extraneous-dependencies": "off",
+        "jsx-a11y/anchor-is-valid": ["error", {
+            "components": ["Link"],
+            "specialLink": ["to"]
+        }],
+        "react/jsx-filename-extension": [1, {
+            "extensions": [".js", ".jsx"]
+        }],
+
+        "constructor-super": "warn",
+        "valid-typeof": "warn"
+    },
+
+
+    "settings": {
+        "react": {
+            "pragma": "React", // Pragma to use, default to "React"
+            "version": "16.0" // React version, default to the latest React stable release
+        },
+        "import/ignore": [
+            "node_modules",
+            "\\.json$"
+        ],
+        "import/parser": "babel-eslint",
+        "import/resolve": {
+            "extensions": [
+                ".js",
+                ".jsx",
+                ".json"
+            ]
+        }
+    }
+}
