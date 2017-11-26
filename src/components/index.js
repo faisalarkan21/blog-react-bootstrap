@@ -6,7 +6,7 @@ class Dashboard extends Component {
     return (
       <div className >
         <Col xs={4} md={5} lg={4} >
-          <Panel header="Read Me" bsStyle="primary">
+          <Panel header="ReadMe" bsStyle="primary">
             Hi there, i'm just making webpack config and basic example component
             <code>bootstrap paper with react and redux stuff</code>,
             so i can clone this repo if need it &nbsp; 😎.
