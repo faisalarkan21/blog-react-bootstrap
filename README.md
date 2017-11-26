@@ -2,7 +2,7 @@
 
 ## Purpose
 
-![alt tag](https://github.com/faisalarkan21/cms-laboratory/blob/master/public/images/sample.png)
+![alt tag](https://github.com/faisalarkan21/react-bootstrap-stater-kit/blob/master/public/images/sample.png)
 
 
 ## Dependencies
