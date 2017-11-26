@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   devtool: 'source-map', // for display source map in browser
-  entry: ['babel-polyfill', './index.js'], // entry point
+  entry: ['./index.js'], // entry point
   output: {
     filename: 'bundle.js', // place where bundled app will be served
   },
