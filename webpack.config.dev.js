@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   devtool: 'source-map', // for display source map in browser
-  entry: ['./index.js'], // entry point
+  entry: ['babel-polyfill', './index.js'], // entry point
   output: {
     filename: 'bundle.js', // place where bundled app will be served
   },
@@ -24,18 +24,22 @@ const config = {
       inject: true,
       template: 'public/index.html',
     }),
-
-
   ],
   module: {
     rules: [
       {
         test: /\.js?$/, // search for js files
         exclude: /node_modules(?!\/webpack-dev-server)/,
-        loader: 'babel-loader',
-        query: {
-          plugins: ['transform-runtime'],
-          presets: ['es2016', 'stage-3', 'react'], // use es2016 and react
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env'],
+              ['@babel/preset-stage-2'],
+              ['@babel/preset-react', { development: true }],
+            ],
+
+          },
         },
       }, {
         test: /\.css$/,
@@ -48,9 +52,7 @@ const config = {
             options: {},
           },
         ],
-
       }, {
-
         test: /\.scss$/,
         use: [{
           loader: 'style-loader', // creates style nodes from JS strings

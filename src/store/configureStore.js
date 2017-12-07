@@ -6,7 +6,7 @@ import rootReducers from '../reducers';
 
 
 const logger = createLogger({
-  // ...options
+  logErrors: false,
 });
 
 /* eslint-disable no-underscore-dangle */

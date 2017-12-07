@@ -1,6 +1,8 @@
-{
-    
-        "presets": ["react", "es2016", "stage-3"],
-        "plugins": ["transform-class-properties"]
-    
-    }
+{    "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 Chrome versions"]
+      }
+    }]
+  ]
+}
