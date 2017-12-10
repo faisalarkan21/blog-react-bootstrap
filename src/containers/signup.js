@@ -18,31 +18,38 @@ class SignUp extends React.Component {
   }
 
   state ={
+    isRedirect: false,
+    isError: false,
     isSuccess: false,
   }
 
+  handleRedirect() {
+    setTimeout(() => {
+      this.setState({ isRedirect: true });
+    }, 3000);
+  }
+
   handleSubmitApi(value) {
-    const result = postApi(value);
-    Promise.resolve(result).then((res) => {
-      setTimeout(() => {
-        if (res.data === 'OK') {
-          this.setState({ isSuccess: true });
-        }
-      }, 4000);
+    this.handleRedirect();
+    postApi(value).then((res) => {
+      if (res.data) {
+        this.setState({ isSuccess: true });
+      }
+    }).catch((err) => {
+      this.setState({ isError: true });
     });
   }
 
 
   render() {
-    const { isSuccess } = this.state;
+    const { isRedirect, isError, isSuccess } = this.state;
 
-    if (isSuccess) {
+    if (isRedirect) {
       return <Redirect to="/login" />;
     }
-
     return (
       <div>
-        <SignUpComponent handleSubmitApi={this.handleSubmitApi} />
+        <SignUpComponent handleSubmitApi={this.handleSubmitApi} isError={isError} isSuccess={isSuccess} />
       </div>
 
     );
