@@ -3,8 +3,12 @@
 const axios = require('axios');
 const querystring = require('querystring');
 
+const instanceAxios = axios.create({
+  baseURL: 'http://127.0.0.1:3001/api/',
+  timeout: 1000,
+});
 
-const API_ROOT = 'http://127.0.0.1:3001/api/';
+
 const CREATE_USER = 'http://127.0.0.1:3001/api/users/create-user';
 
 const showResults = async () => {
@@ -17,7 +21,7 @@ const showResults = async () => {
 
 const fetchApi = async (endpoint) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-  const result = await axios(fullUrl).catch(err => console.error(`Bad request on call api get. \n${err}`));
+  const result = await instanceAxios(fullUrl).catch(err => console.error(`Bad request on call api get. \n${err}`));
 };
 
 const postApi = async (values) => {
@@ -28,8 +32,7 @@ const postApi = async (values) => {
     roleId: 2,
   };
 
-  const result = await axios.post(CREATE_USER, schema)
-    .catch(err => console.error(`something gone wrong.\n${err}`));
+  const result = await instanceAxios.post(CREATE_USER, schema);
 
 
   return result;
