@@ -1,4 +1,5 @@
 
+import { SubmissionError } from 'redux-form';
 
 const axios = require('axios');
 const querystring = require('querystring');
@@ -32,7 +33,14 @@ const postApi = async (values) => {
     roleId: 2,
   };
 
-  const result = await instanceAxios.post(CREATE_USER, schema);
+  const result = await instanceAxios.post(CREATE_USER, schema).catch((err) => {
+    if (err.response) {
+      return err.response;
+    }
+    throw new SubmissionError({
+      _error: 'Internal server Error',
+    });
+  });
 
 
   return result;
