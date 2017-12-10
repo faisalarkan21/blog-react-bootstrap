@@ -30,15 +30,19 @@ const config = {
       {
         test: /\.js?$/, // search for js files
         exclude: /node_modules(?!\/webpack-dev-server)/,
+
         use: {
           loader: 'babel-loader',
+
           options: {
+            babelrc: false,
             presets: [
               ['@babel/preset-env'],
               ['@babel/preset-stage-2'],
               ['@babel/preset-react', { development: true }],
-            ],
 
+            ],
+            plugins: ['transform-decorators-legacy'],
           },
         },
       }, {

@@ -4,28 +4,24 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'history';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import { showAlert } from '../actions/index';
 
 import SignUpComponent from '../components/signup-form';
 import { test, showResults, postApi } from '../middleware/api';
 
-
+@withRouter
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmitApi = this.handleSubmitApi.bind(this);
   }
 
-  state ={
-    isRedirect: false,
-  }
-
   handleSubmitApi(value) {
     return postApi(value).then((res) => {
       if (res.status === 200) {
         setTimeout(() => {
-          this.setState({ isRedirect: true });
+          this.props.history.push('/login');
         }, 3000);
       } else if (res.data.code === '23505') {
         throw new SubmissionError({
@@ -38,10 +34,6 @@ class SignUp extends React.Component {
 
 
   render() {
-    const { isRedirect } = this.state;
-    if (isRedirect) {
-      return <Redirect to="/login" />;
-    }
     return (
       <div>
         <SignUpComponent handleSubmitApi={this.handleSubmitApi} />
