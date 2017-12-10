@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'history';
@@ -19,37 +19,32 @@ class SignUp extends React.Component {
 
   state ={
     isRedirect: false,
-    isError: false,
-    isSuccess: false,
-  }
-
-  handleRedirect() {
-    setTimeout(() => {
-      this.setState({ isRedirect: true });
-    }, 3000);
   }
 
   handleSubmitApi(value) {
-    this.handleRedirect();
-    postApi(value).then((res) => {
-      if (res.data) {
-        this.setState({ isSuccess: true });
+    return postApi(value).then((res) => {
+      if (res.status === 200) {
+        setTimeout(() => {
+          this.setState({ isRedirect: true });
+        }, 3000);
+      } else if (res.data.code === '23505') {
+        throw new SubmissionError({
+          email: 'Email sudah terdaftar..',
+          _error: 'Cek kembali pengisian email.',
+        });
       }
-    }).catch((err) => {
-      this.setState({ isError: true });
     });
   }
 
 
   render() {
-    const { isRedirect, isError, isSuccess } = this.state;
-
+    const { isRedirect } = this.state;
     if (isRedirect) {
       return <Redirect to="/login" />;
     }
     return (
       <div>
-        <SignUpComponent handleSubmitApi={this.handleSubmitApi} isError={isError} isSuccess={isSuccess} />
+        <SignUpComponent handleSubmitApi={this.handleSubmitApi} />
       </div>
 
     );
