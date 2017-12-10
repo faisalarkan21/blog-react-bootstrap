@@ -13,7 +13,7 @@ class SignUp extends React.Component {
     const {
       handleSubmit, handleSubmitApi,
     } = this.props;
-    
+
     return (
       <div>
         <Col id="login-panel" className="panel panel-default panel-well" xs={10} sm={5} md={5} lg={4} xsOffset={1} smOffset={3} mdOffset={3} lgOffset={4} >
@@ -76,11 +76,19 @@ class SignUp extends React.Component {
               </Col>
             </form>
 
-            {this.props.submitSucceeded && (
+            {this.props.isSuccess && (
             <Alert bsStyle="success" className="text-center ">
               <b> Selamat! </b> Anda telah terdaftar. <br />
               Anda Dialihkan ke halaman login.
             </Alert>)}
+
+            {this.props.isError && (
+            <Alert bsStyle="danger" className="text-center ">
+              <b> Terjadi kesalahan! <br /> </b> Internal server error. <br />
+              Anda Dialihkan ke halaman login.
+            </Alert>)}
+
+
           </Col>
         </Col>
 
