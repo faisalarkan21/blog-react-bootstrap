@@ -5,7 +5,7 @@ import { Col, Button, Alert } from 'react-bootstrap';
 
 
 import { required, email, minLength6, passwordConfirm } from '../middleware/rules-validator';
-import { FieldInput, AlertInstance } from './lib';
+import { FieldInput, AlertInstance, ShowAlert } from './lib';
 
 
 class SignUp extends React.Component {
@@ -13,7 +13,6 @@ class SignUp extends React.Component {
     const {
       handleSubmit, handleSubmitApi,
     } = this.props;
-
     return (
       <div>
         <Col id="login-panel" className="panel panel-default panel-well" xs={10} sm={5} md={5} lg={4} xsOffset={1} smOffset={3} mdOffset={3} lgOffset={4} >
@@ -35,7 +34,6 @@ class SignUp extends React.Component {
                 />
               </div>
 
-
               <div>
                 <Field
                   name="email"
@@ -47,7 +45,6 @@ class SignUp extends React.Component {
                 />
               </div>
 
-
               <div>
                 <Field
                   name="password"
@@ -58,7 +55,6 @@ class SignUp extends React.Component {
                   validate={[required, minLength6, passwordConfirm]}
                 />
               </div>
-
 
               <div>
                 <Field
@@ -76,19 +72,11 @@ class SignUp extends React.Component {
               </Col>
             </form>
 
-            {this.props.isSuccess && (
-            <Alert bsStyle="success" className="text-center ">
-              <b> Selamat! </b> Anda telah terdaftar. <br />
-              Anda Dialihkan ke halaman login.
-            </Alert>)}
-
-            {this.props.isError && (
-            <Alert bsStyle="danger" className="text-center ">
-              <b> Terjadi kesalahan! <br /> </b> Internal server error. <br />
-              Anda Dialihkan ke halaman login.
-            </Alert>)}
-
-
+            <ShowAlert
+              status={(this.props.error === undefined
+            && this.props.submitSucceeded)
+            || this.props.error}
+            />
           </Col>
         </Col>
 
