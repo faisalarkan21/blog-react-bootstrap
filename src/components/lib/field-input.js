@@ -10,7 +10,7 @@ function FieldInput(props) {
   } = props;
   // console.log(props);
   return (
-    <FormGroup controlId="formValidationError1" validationState={touched && invalid === true ? 'error' : null}>
+    <FormGroup validationState={touched && invalid === true ? 'error' : null}>
       <InputGroup>
         <InputGroup.Addon>{icon}
         </InputGroup.Addon>
