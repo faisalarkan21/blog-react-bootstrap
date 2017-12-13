@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { testApi } from '../actions';
+import { loadTestApi } from '../actions';
 import MainComponent from '../components';
 
 
 class App extends React.Component {
   render() {
-    const { callApi } = this.props;
-    console.log(callApi);
+    const { result, testApi } = this.props;
+
     return (
       <div>
         <MainComponent
           linkDaftar="/daftar"
           linkLogin="/login"
-          testApi={this.props.stateAPi}
-          dataResponse={callApi}
+          testApi={testApi}
+          dataResponse={result}
         />
       </div>
 
@@ -25,14 +25,14 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
-    callApi: state.callApi,
+    result: state.callApi,
   };
 }
+
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({
-    stateAPi: testApi,
+    testApi: loadTestApi,
   }, dispatch);
 }
 

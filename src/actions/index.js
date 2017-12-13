@@ -1,7 +1,15 @@
+import * as api from '../middleware/api';
 
-export const SHOW_ALERT = 'SHOW_ALERT';
+export const TEST_API = 'TEST_API';
 
-export const showAlert = value => ({
-  type: SHOW_ALERT,
+const testApi = value => ({
+  type: TEST_API,
   payload: value,
 });
+
+
+export const loadTestApi = () => async (dispatch) => {
+  const res = await api.fetchApi();
+  dispatch(testApi(res));
+};
+
