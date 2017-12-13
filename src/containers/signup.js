@@ -8,7 +8,7 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import { showAlert } from '../actions/index';
 
 import SignUpComponent from '../components/signup-form';
-import { test, showResults, postApi } from '../middleware/api';
+import { test, showResults, postCreateUser } from '../middleware/api';
 
 @withRouter
 class SignUp extends React.Component {
@@ -18,7 +18,7 @@ class SignUp extends React.Component {
   }
 
   handleSubmitApi(value) {
-    return postApi(value).then((res) => {
+    return postCreateUser(value).then((res) => {
       if (res.status === 200) {
         setTimeout(() => {
           this.props.history.push('/login');
@@ -31,7 +31,6 @@ class SignUp extends React.Component {
       }
     });
   }
-
 
   render() {
     return (

@@ -88,7 +88,4 @@ class SignUp extends React.Component {
 
 export default reduxForm({
   form: 'formSignUp',
-  onSubmitSuccess: (result, dispatch, props) => {
-
-  },
 })(SignUp);

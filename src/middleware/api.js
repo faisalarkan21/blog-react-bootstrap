@@ -11,6 +11,8 @@ const instanceAxios = axios.create({
 
 
 const CREATE_USER = 'http://127.0.0.1:3001/api/users/create-user';
+const LOGIN_USER = 'http://127.0.0.1:3001/api/users/login';
+
 
 const showResults = async () => {
   const result = await axios.get(API_ROOT).catch(err => console.error(`Bad request fetch get. \n${err}`));
@@ -20,12 +22,12 @@ const showResults = async () => {
 };
 
 
-const fetchApi = async (endpoint) => {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-  const result = await instanceAxios(fullUrl).catch(err => console.error(`Bad request on call api get. \n${err}`));
+const fetchApi = async (endpoint, values) => {
+  const result = await instanceAxios().catch(err => console.error(`Bad request on call api get. \n${err}`));
+  return result;
 };
 
-const postApi = async (values) => {
+const postCreateUser = async (values) => {
   const schema = {
     username: values.name,
     email: values.email,
@@ -42,10 +44,27 @@ const postApi = async (values) => {
     });
   });
 
+  return result;
+};
+
+const postLoginUser = async (values) => {
+  const schema = {
+    email: values.email,
+    password: values.password,
+  };
+
+  const result = await instanceAxios.post(LOGIN_USER, schema).catch((err) => {
+    if (err.response) {
+      return err.response;
+    }
+    throw new SubmissionError({
+      _error: 'Internal server Error',
+    });
+  });
 
   return result;
 };
 
 
-export { showResults, fetchApi, postApi };
+export { showResults, fetchApi, postCreateUser, postLoginUser };
 

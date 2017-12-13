@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Panel, Col, Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import { test, showResults, postApi } from '../middleware/api';
-
 
 class Dashboard extends Component {
   render() {
-    const { linkLogin, linkDaftar } = this.props;
+    const {
+      linkLogin, linkDaftar, testApi, dataResponse,
+    } = this.props;
     return (
       <div>
         <Navbar className="navbar navbar-default navbar-fixed-top">
@@ -39,11 +39,16 @@ class Dashboard extends Component {
         </Navbar>
 
 
-        <Col id="post-panel" xs={4} md={5} lg={4} >
-          <Panel header="Post Panel" bsStyle="primary">
-            Not yet implemented
+        <Col id="post-panel" xs={5} md={5} lg={5} >
+          <Panel header="Test Panel" bsStyle="primary">
+            {dataResponse.message}
+            <br />
+            {dataResponse.database}
+            <br />
+            {dataResponse.codeResponse}
           </Panel>
-          <Button onClick={postApi} bsStyle="primary">Di Baca Gan!</Button>
+          <Button onClick={testApi} bsStyle="primary">Test API Connection</Button>
+
         </Col>
 
 
