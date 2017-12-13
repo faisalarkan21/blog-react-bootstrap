@@ -8,10 +8,10 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import { showAlert } from '../actions/index';
 
 import SignUpComponent from '../components/signup-form';
-import { loadSignUp } from '../actions';
+import { loadPostApi } from '../actions';
 
 /* eslint no-use-before-define: ["error", { "functions": false }] */
-@connect(mapStateToProps, { loadSignUp })
+@connect(mapStateToProps, { loadPostApi })
 @withRouter
 class SignUp extends React.Component {
   constructor(props) {
@@ -20,17 +20,18 @@ class SignUp extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { result } = nextProps;
-    setTimeout(() => {
-      this.props.history.push(result.res.endpoint);
-    }, 3000);
+    console.log(nextProps.result.res.endpoint);
+    // this.props.history.push(nextProps.result.res.endpoint);
   }
+
 
   handleSubmitApi(value) {
-    return this.props.loadSignUp(value);
+    this.props.loadPostApi(value);
   }
 
+
   render() {
+    // console.log(this.props.result);
     return (
       <div>
         <SignUpComponent handleSubmitApi={this.handleSubmitApi} />
@@ -38,7 +39,6 @@ class SignUp extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {

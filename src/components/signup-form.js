@@ -79,8 +79,6 @@ class SignUp extends React.Component {
             />
           </Col>
         </Col>
-
-
       </div>
     );
   }
