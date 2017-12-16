@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import { Panel, Col, Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import {
+  Panel,
+  Col,
+  Button,
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
 
 class Dashboard extends Component {
   render() {
@@ -27,35 +35,30 @@ class Dashboard extends Component {
               <MenuItem eventKey={3.4}>Separated link</MenuItem>
             </NavDropdown>
           </Nav>
-          <Navbar.Form pullRight >
-            <LinkContainer to={linkDaftar} >
+          <Navbar.Form pullRight>
+            <LinkContainer to={linkDaftar}>
               <Button className="btn-paired">Daftar</Button>
             </LinkContainer>
-            <LinkContainer to={linkLogin} >
+            <LinkContainer to={linkLogin}>
               <Button bsStyle="primary">Login</Button>
             </LinkContainer>
           </Navbar.Form>
 
         </Navbar>
 
-
-        <Col id="post-panel" xs={5} md={5} lg={5} >
+        <Col id="post-panel" xs={5} md={5} lg={5}>
           <Panel header="Test Panel" bsStyle="primary">
-            {dataResponse.message}
-            <br />
-            {dataResponse.database}
-            <br />
-            {dataResponse.codeResponse}
+            {dataResponse.message ? dataResponse.message : 'Hey you there, Call Me ! (┛◉Д◉)┛┻━┻'}
+            <br /> {dataResponse.database}
+            <br /> {dataResponse.codeResponse}
           </Panel>
           <Button onClick={testApi} bsStyle="primary">Test API Connection</Button>
 
         </Col>
 
-
       </div>
     );
   }
 }
-
 
 export default Dashboard;
