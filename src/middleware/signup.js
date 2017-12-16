@@ -29,7 +29,6 @@ class SignUp extends React.Component {
     this.props.loadPostApi(value);
   }
 
-
   render() {
     // console.log(this.props.result);
     return (

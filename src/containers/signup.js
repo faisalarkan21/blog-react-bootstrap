@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { browserHistory } from 'history';
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-// import { showAlert } from '../actions/index';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import SignUpComponent from '../components/signup-form';
 import { loadSignUp } from '../actions';
