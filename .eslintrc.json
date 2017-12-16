@@ -20,6 +20,7 @@
     },
     "rules": {
         "semi": 2,
+        "react/prop-types":"off",
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "no-undef": "warn",
