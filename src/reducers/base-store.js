@@ -2,7 +2,6 @@ import * as ActionType from '../actions';
 
 
 const callApi = (state = '', action) => {
-  console.log(action.payload);
   switch (action.type) {
     case ActionType.TEST_API:
       return {
@@ -17,9 +16,33 @@ const callApi = (state = '', action) => {
         res: action.payload,
 
       };
+    case ActionType.LOGIN_USER_API:
+      return {
+        ...state,
+        isAuthenticated: action.payload.isAuthenticated,
+        location: action.payload.location,
+      };
     default:
       return state;
   }
 };
 
-export { callApi };
+const loginAuth = (state = {
+  isLoginAuthenticated: false,
+  location: '',
+  token: '',
+}, action) => {
+  switch (action.type) {
+    case ActionType.LOGIN_USER_API:
+      return {
+        ...state,
+        isLoginAuthenticated: action.payload.isLoginAuthenticated,
+        location: action.payload.location,
+        token: action.payload.token,
+      };
+    default:
+      return state;
+  }
+};
+
+export { callApi, loginAuth };
