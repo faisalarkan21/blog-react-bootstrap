@@ -8,7 +8,6 @@ function FieldInput(props) {
       touched, error, warning, invalid,
     },
   } = props;
-  // console.log(props);
   return (
     <FormGroup validationState={touched && invalid === true ? 'error' : null}>
       <InputGroup>

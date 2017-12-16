@@ -19,18 +19,12 @@ class SignUp extends React.Component {
     this.handleSubmitApi = this.handleSubmitApi.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.result.res.endpoint);
-    // this.props.history.push(nextProps.result.res.endpoint);
-  }
-
 
   handleSubmitApi(value) {
     this.props.loadPostApi(value);
   }
 
   render() {
-    // console.log(this.props.result);
     return (
       <div>
         <SignUpComponent handleSubmitApi={this.handleSubmitApi} />

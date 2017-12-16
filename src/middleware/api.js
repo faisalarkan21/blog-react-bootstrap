@@ -18,7 +18,6 @@ const showResults = async () => {
   const result = await axios.get(API_ROOT).catch(err => console.error(`Bad request fetch get. \n${err}`));
   if (!result) return;
   alert(result.data.status);
-  console.log(result);
 };
 
 
