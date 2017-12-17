@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import path from 'path';
+import { BrowserRouter } from 'react-router-dom';
 
 import store from './src/store/configureStore';
 import Root from './src/containers/root';
@@ -15,8 +16,11 @@ import 'font-awesome/css/font-awesome.min.css';
 /* eslint-enable */
 ReactDOM.render(
 
+
   <Provider store={store}>
-    <Root />
+    <BrowserRouter>
+      <Root />
+    </BrowserRouter>
   </Provider>
 
   , document.getElementById('root'),
