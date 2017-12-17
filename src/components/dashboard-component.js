@@ -36,9 +36,7 @@ class Dashboard extends Component {
             <LinkContainer to="linkDaftar">
               <Button className="btn-paired">Daftar</Button>
             </LinkContainer>
-            <LinkContainer to="/logout">
-              <Button bsStyle="primary">Logout</Button>
-            </LinkContainer>
+            <Button onClick={this.props.logOut} bsStyle="primary">Logout</Button>
           </Navbar.Form>
 
         </Navbar>

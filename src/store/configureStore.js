@@ -1,20 +1,28 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
+import { REHYDRATE, PURGE, persistCombineReducers, persistStore } from 'redux-persist';
+
+
 import thunk from 'redux-thunk';
-import rootReducers from '../reducers';
+import persistRootReducers from '../reducers';
 
 
 const logger = createLogger({
-  logErrors: false,
+  logErrors: true,
 });
 
 /* eslint-disable no-underscore-dangle */
-const configureStore = createStore(
-  rootReducers,
-  applyMiddleware(logger, thunk),
-
+const store = createStore(
+  persistRootReducers,
+  undefined, applyMiddleware(logger, thunk),
 );
 
+persistStore(
+  store, null,
+  () => {
+    store.getState();
+  },
+);
 
-export default configureStore;
+export default store;

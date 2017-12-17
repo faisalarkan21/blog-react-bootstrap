@@ -16,12 +16,6 @@ const callApi = (state = '', action) => {
         res: action.payload,
 
       };
-    case ActionType.LOGIN_USER_API:
-      return {
-        ...state,
-        isAuthenticated: action.payload.isAuthenticated,
-        location: action.payload.location,
-      };
     default:
       return state;
   }
@@ -34,6 +28,13 @@ const loginAuth = (state = {
 }, action) => {
   switch (action.type) {
     case ActionType.LOGIN_USER_API:
+      return {
+        ...state,
+        isLoginAuthenticated: action.payload.isLoginAuthenticated,
+        location: action.payload.location,
+        token: action.payload.token,
+      };
+    case ActionType.LOGOUT_USER:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,

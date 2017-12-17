@@ -1,27 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
-
-import { loginAuth } from '../reducers/base-store';
-
-const tokenAuth = {
-  isTokenAuthenticated() {
-    const token = Cookies.get('token');
-    if (token) {
-      return true;
-    }
-    return false;
-  },
-
-};
+import { tokenAuth } from './auth-cookies';
 
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={propsRender => (
-        tokenAuth.isTokenAuthenticated() ? (
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  console.log(rest);
+  return (
+    <Route
+      {...rest}
+      render={propsRender => (
+        tokenAuth.tokenAuthenticated() ? (
           <Component {...propsRender} />
     ) : (
       <Redirect to={{
@@ -34,13 +22,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       />
     )
   )}
-  />
+    />
+  );
+};
 
-);
-
-
-function mapStateToProps(state) {
-  return { result: state.loginAuth };
-}
-
-export default connect(mapStateToProps, null, null, { pure: false })(PrivateRoute);
+export {
+  PrivateRoute,
+};

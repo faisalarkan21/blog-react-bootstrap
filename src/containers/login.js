@@ -15,6 +15,7 @@ class Login extends React.Component {
 
   handleLogin(value) {
     const { location } = this.props;
+    console.log(location);
     if (location.state) {
       const { location } = this.props.history;
       delete location.state;
@@ -26,13 +27,13 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { isLoginAuthenticated, location } = this.props.result;
     if (isLoginAuthenticated) {
       return (
         <Redirect to={location} />
       );
     }
-
     return (
       <div>
         <LoginComponent handleLogin={this.handleLogin} message={this.props.location.state} linkDaftar="/daftar" />

@@ -7,7 +7,8 @@ import * as api from '../middleware/api';
 export const TEST_API = 'TEST_API';
 export const CREATE_USER_API = 'CREATE_USER_API';
 export const LOGIN_USER_API = 'LOGIN_USER_API';
-
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const REHYDRATE = 'REHYDRATE';
 
 /**
  *  Test API
@@ -31,11 +32,11 @@ export const loadTestApi = () => async (dispatch) => {
  * @param {*} endpoint URL Push -> react router
  */
 
-const createUser = (value, endpoint) => ({
+const createUser = (value, location) => ({
   type: CREATE_USER_API,
   payload: {
     res: value,
-    endpoint,
+    location,
   },
 });
 
@@ -52,7 +53,11 @@ export const loadSignUp = value => async (dispatch) => {
   return dispatch(createUser(res, '/login'));
 };
 
-const loginUser = (value, endpoint) => ({
+/**
+ * @constant loginUser for action Login.
+ */
+
+const loginUser = value => ({
   type: LOGIN_USER_API,
   payload: value,
 });
@@ -61,9 +66,9 @@ export const loadLogin = value => async (dispatch) => {
   const res = await api.postLoginUser(value);
   const { token } = res.data;
   if (res.status === 200) {
-    Cookies.set('token', token);
-    dispatch(loginUser({ isLoginAuthenticated: true, location: '/dashboard', token }));
-  } 
+    Cookies.set('userToken', token);
+    dispatch(loginUser({ isLoginAuthenticated: true, location: '/dashboard' }));
+  }
   throw new SubmissionError({
     email: true,
     password: true,
@@ -71,3 +76,13 @@ export const loadLogin = value => async (dispatch) => {
   });
 };
 
+
+const logOutUser = value => ({
+  type: LOGOUT_USER,
+  payload: value,
+});
+
+export const loadLogOut = () => async (dispatch) => {
+  Cookies.remove('userToken', { path: '' });
+  dispatch(logOutUser({ isLoginAuthenticated: false, location: '/login' }));
+};
