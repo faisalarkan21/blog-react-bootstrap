@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Button } from 'react-bootstrap';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { FieldInput, ShowAlert } from './lib';
 import { required, email, minLength6 } from '../middleware/rules-validator';
@@ -77,4 +77,7 @@ const Dashboard = (props) => {
 
 export default reduxForm({
   form: 'formLogin',
+  onSubmitSuccess(result, dispatch) {
+    dispatch(reset('formLogin'));
+  },
 })(Dashboard);
