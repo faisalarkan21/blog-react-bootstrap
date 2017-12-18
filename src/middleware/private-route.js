@@ -4,7 +4,7 @@ import { tokenAuth } from './auth-cookies';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(rest);
+  console.log(tokenAuth.tokenAuthenticated());
   return (
     <Route
       {...rest}

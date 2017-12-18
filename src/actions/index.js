@@ -1,6 +1,6 @@
 import { SubmissionError } from 'redux-form';
-import Cookies from 'js-cookie';
-
+// import Cookies from 'js-cookie';
+import { tokenAuth } from '../middleware/auth-cookies';
 
 import * as api from '../middleware/api';
 
@@ -23,7 +23,10 @@ const testApi = value => ({
 
 export const loadTestApi = () => async (dispatch) => {
   const res = await api.fetchApi();
-  dispatch(testApi(res));
+  if (res.status === 200) {
+    return dispatch(testApi(res));
+  }
+  return dispatch(testApi(res));
 };
 
 /**
@@ -66,8 +69,8 @@ export const loadLogin = value => async (dispatch) => {
   const res = await api.postLoginUser(value);
   const { token } = res.data;
   if (res.status === 200) {
-    Cookies.set('userToken', token);
-    dispatch(loginUser({ isLoginAuthenticated: true, location: '/dashboard' }));
+    tokenAuth.setCookies(token);
+    return dispatch(loginUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated(), location: '/dashboard' }));
   }
   throw new SubmissionError({
     email: true,
@@ -83,6 +86,6 @@ const logOutUser = value => ({
 });
 
 export const loadLogOut = () => async (dispatch) => {
-  Cookies.remove('userToken', { path: '' });
-  dispatch(logOutUser({ isLoginAuthenticated: false, location: '/login' }));
+  tokenAuth.eraseCookies();
+  dispatch(logOutUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated(), location: '/login' }));
 };
