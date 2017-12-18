@@ -2,7 +2,6 @@
 import { SubmissionError } from 'redux-form';
 
 const axios = require('axios');
-const querystring = require('querystring');
 
 const instanceAxios = axios.create({
   baseURL: 'http://127.0.0.1:3001/api/',
@@ -22,7 +21,18 @@ const showResults = async () => {
 
 
 const fetchApi = async (endpoint, values) => {
-  const result = await instanceAxios().catch(err => console.error(`Bad request on call api get. \n${err}`));
+  const result = await instanceAxios().catch((err) => {
+    if (err) {
+      return {
+        status: '500',
+        data: {
+          message: 'Hey we got this Ok!, check the API server!',
+          database: 'Internal server error.',
+        },
+      };
+    }
+    return err;
+  });
   return result;
 };
 

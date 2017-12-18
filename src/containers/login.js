@@ -13,9 +13,24 @@ class Login extends React.Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
+
+  componentWillMount() {
+    const { isLoginAuthenticated, location } = this.props.result;
+    if (isLoginAuthenticated) {
+      this.props.history.push(location);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { result } = nextProps;
+    console.log(nextProps);
+    setTimeout(() => {
+      this.props.history.push(result.location);
+    }, 500);
+  }
+
   handleLogin(value) {
     const { location } = this.props;
-    console.log(location);
     if (location.state) {
       const { location } = this.props.history;
       delete location.state;
@@ -27,16 +42,13 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    const { isLoginAuthenticated, location } = this.props.result;
-    if (isLoginAuthenticated) {
-      return (
-        <Redirect to={location} />
-      );
-    }
     return (
       <div>
-        <LoginComponent handleLogin={this.handleLogin} message={this.props.location.state} linkDaftar="/daftar" />
+        <LoginComponent
+          handleLogin={this.handleLogin}
+          message={this.props.location.state}
+          linkDaftar="/daftar"
+        />
       </div>
     );
   }
