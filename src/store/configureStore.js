@@ -7,22 +7,20 @@ import { REHYDRATE, PURGE, persistCombineReducers, persistStore } from 'redux-pe
 import thunk from 'redux-thunk';
 import persistRootReducers from '../reducers';
 
-
 const logger = createLogger({
   logErrors: true,
 });
 
-/* eslint-disable no-underscore-dangle */
-const store = createStore(
-  persistRootReducers,
-  undefined, applyMiddleware(logger, thunk),
-);
 
-persistStore(
-  store, null,
-  () => {
-    store.getState();
-  },
-);
+const middleWares = [thunk, logger];
 
-export default store;
+
+const configureStore = () => {
+  const store = createStore(persistRootReducers, applyMiddleware(...middleWares));
+  const persistor = persistStore(store);
+
+  return { persistor, store };
+};
+
+
+export default configureStore;

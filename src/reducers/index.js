@@ -7,8 +7,9 @@ import { callApi, loginAuth } from './base-store';
 
 const config = {
   key: 'root',
+  debug: true,
   storage,
-  blacklist: ['location', 'form'],
+  blacklist: ['location', 'form', 'callApi'],
 };
 
 
