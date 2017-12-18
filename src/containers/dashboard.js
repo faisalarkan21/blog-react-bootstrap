@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect } from 'react-router-dom';
+import { NavBarUser } from '../components/lib';
 
 import { loadLogOut } from '../actions';
 import { connect } from 'react-redux';
@@ -16,8 +17,10 @@ class Dashboard extends React.Component {
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
+
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
+
     if (!result.isLoginAuthenticated) {
       this.props.history.push(result.location);
     }
@@ -26,9 +29,11 @@ class Dashboard extends React.Component {
   handleLogOut() {
     this.props.loadLogOut();
   }
+
   render() {
     return (
       <div>
+        <NavBarUser logOut={this.handleLogOut} />
         <DashboardComponent logOut={this.handleLogOut} />
       </div>
 
