@@ -13,19 +13,16 @@ import 'typeface-roboto';
 import './public/style/base.scss';
 import 'font-awesome/css/font-awesome.min.css';
 
-const { persistor, store } = configureStore();
+
 
 /* eslint-enable */
 ReactDOM.render(
 
-  <Provider store={store}>
+  <Provider store={configureStore}>
     <BrowserRouter>
-      <PersistGate
-        loading={<div />}
-        persistor={persistor}
-      >
-        <Root />
-      </PersistGate>
+
+      <Root />
+
     </BrowserRouter>
   </Provider>
   , document.getElementById('root'),

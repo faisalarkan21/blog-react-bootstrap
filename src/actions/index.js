@@ -8,7 +8,7 @@ export const TEST_API = 'TEST_API';
 export const CREATE_USER_API = 'CREATE_USER_API';
 export const LOGIN_USER_API = 'LOGIN_USER_API';
 export const LOGOUT_USER = 'LOGOUT_USER';
-export const REHYDRATE = 'REHYDRATE';
+export const CHECK_AUTH = 'CHECK_AUTH';
 
 /**
  *  Test API
@@ -80,12 +80,18 @@ export const loadLogin = value => async (dispatch) => {
 };
 
 
+export const checkAuth = value => ({
+  type: CHECK_AUTH,
+  payload: value,
+});
+
+
 const logOutUser = value => ({
   type: LOGOUT_USER,
   payload: value,
 });
 
-export const loadLogOut = () => async (dispatch) => {
+export const loadLogOut = () => (dispatch) => {
   tokenAuth.eraseCookies();
   dispatch(logOutUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated(), location: '/login' }));
 };

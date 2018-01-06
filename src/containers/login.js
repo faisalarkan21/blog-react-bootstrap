@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import LoginComponent from '../components/login-form';
-import { loadLogin } from '../actions';
+import { loadLogin, checkAuth } from '../actions';
 
 /* eslint no-use-before-define: ["error", { "functions": false }] */
 @connect(mapStateToProps, { loadLogin })
@@ -15,9 +15,9 @@ class Login extends React.Component {
 
 
   componentWillMount() {
-    const { isLoginAuthenticated, location } = this.props.result;
+    const { isLoginAuthenticated } = this.props;
     if (isLoginAuthenticated) {
-      this.props.history.push(location);
+      this.props.history.push('/dashboard');
     }
   }
 

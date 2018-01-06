@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
 import { tokenAuth } from './auth-cookies';
+import { checkAuth } from '../actions';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -26,6 +29,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
+
+const LoginRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Component
+        {...props}
+        isLoginAuthenticated={tokenAuth.tokenAuthenticated()}
+      />
+  )}
+  />
+);
+
 export {
-  PrivateRoute,
+  PrivateRoute, LoginRoute,
 };
