@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect } from 'react-router-dom';
-import { NavBarUser } from '../components/lib';
-
+import { AppNav } from '../components/lib';
+import NavBarContainer from './navbar-container';
 import { loadLogOut } from '../actions';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,6 @@ class Dashboard extends React.Component {
     super(props);
     this.handleLogOut = this.handleLogOut.bind(this);
   }
-
 
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
@@ -33,7 +32,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <NavBarUser logOut={this.handleLogOut} />
+        <NavBarContainer />
         <DashboardComponent logOut={this.handleLogOut} />
       </div>
 

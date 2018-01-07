@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes, { func } from 'prop-types';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { PrivateRoute, LoginRoute } from '../middleware/private-route';
+import { PrivateRoute, LoginRoute, IndexRoute } from '../middleware/private-route';
 
 import App from './app';
 import Signup from './signup';

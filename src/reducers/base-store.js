@@ -26,6 +26,7 @@ const loginAuth = (state = {
   location: '',
   token: '',
 }, action) => {
+  console.log(action);
   switch (action.type) {
     case ActionType.LOGIN_USER_API:
       return {
@@ -35,6 +36,13 @@ const loginAuth = (state = {
         token: action.payload.token,
       };
     case ActionType.LOGOUT_USER:
+      return {
+        ...state,
+        isLoginAuthenticated: action.payload.isLoginAuthenticated,
+        location: action.payload.location,
+        token: action.payload.token,
+      };
+    case ActionType.CHECK_AUTH:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,

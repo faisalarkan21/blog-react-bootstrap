@@ -7,7 +7,7 @@ import { checkAuth } from '../actions';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(tokenAuth.tokenAuthenticated());
+  // console.log(tokenAuth.tokenAuthenticated());
   return (
     <Route
       {...rest}
@@ -30,7 +30,22 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 
-const LoginRoute = ({ component: Component, ...rest }) => (
+const LoginRoute = ({ component: Component, ...rest }) => {
+  // console.log(tokenAuth.tokenAuthenticated());
+  return (
+    <Route
+      {...rest}
+      render={props => (
+        <Component
+          {...props}
+          isLoginAuthenticated={tokenAuth.tokenAuthenticated()}
+        />
+  )}
+    />
+  );
+};
+
+const IndexRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
@@ -42,6 +57,7 @@ const LoginRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+
 export {
-  PrivateRoute, LoginRoute,
+  PrivateRoute, LoginRoute, IndexRoute,
 };

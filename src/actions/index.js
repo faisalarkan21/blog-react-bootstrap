@@ -85,6 +85,9 @@ export const checkAuth = value => ({
   payload: value,
 });
 
+export const loadCheckAuth = () => async (dispatch) => {
+  dispatch(checkAuth({ isLoginAuthenticated: tokenAuth.tokenAuthenticated() }));
+};
 
 const logOutUser = value => ({
   type: LOGOUT_USER,
