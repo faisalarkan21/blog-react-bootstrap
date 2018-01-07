@@ -22,11 +22,12 @@ class Login extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { result } = nextProps;
-    console.log(nextProps);
-    setTimeout(() => {
-      this.props.history.push(result.location);
-    }, 500);
+    const { location, isLoginAuthenticated } = nextProps.result;
+    if (isLoginAuthenticated) {
+      setTimeout(() => {
+        this.props.history.push(location);
+      }, 500);
+    }
   }
 
   handleLogin(value) {
