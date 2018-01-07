@@ -24,7 +24,6 @@ const callApi = (state = '', action) => {
 const loginAuth = (state = {
   isLoginAuthenticated: false,
   location: '',
-  token: '',
 }, action) => {
   console.log(action);
   switch (action.type) {
@@ -33,21 +32,17 @@ const loginAuth = (state = {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
         location: action.payload.location,
-        token: action.payload.token,
       };
     case ActionType.LOGOUT_USER:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
         location: action.payload.location,
-        token: action.payload.token,
       };
     case ActionType.CHECK_AUTH:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
-        location: action.payload.location,
-        token: action.payload.token,
       };
     default:
       return state;
