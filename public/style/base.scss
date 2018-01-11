@@ -1,77 +1,81 @@
-
-html,body {
-    width :100%;
-    height:100%;
-    margin:0;
-    padding:0;
-  }
-
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 $font-input-size: 14px;
-
 input {
     font-size: $font-input-size !important;
 }
 
-#post-panel{
+#post-panel {
     margin: 120px;
 }
 
-#login-panel{
-    margin-top: 50px;     
+#login-panel {
+    margin-top: 50px;
     padding-top: 30px;
     padding-bottom: 50px;
     padding-left: 50px;
     padding-right: 50px;
-   
-  
 }
 
 @media (max-width: 768px) {
-    
-#login-panel{
-    margin-top: 70px;     
-    padding-top: 5px;
-    padding-bottom: 50px;
-    padding-left: 0px;
-    padding-right: 20px;
-   
-   
-  
-}
+    #login-panel {
+        margin-top: 70px;
+        padding-top: 5px;
+        padding-bottom: 50px;
+        padding-left: 0px;
+        padding-right: 20px;
+    }
 }
 
-
-input, i, button, a  {
-   margin-top: 15px;
+.btn-form {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 i {
     margin-left: 7px;
 }
 
-.label-padding{
+.label-padding {
     padding-left: 30px;
-    padding-top:15px;
-    padding-bottom:10px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
-.alert{
+.alert {
     margin-top: 30px !important;
     margin: 20px;
 }
 
-.btn-login{
-
-   width: 50%;
-   margin-bottom:15px; 
+.btn-login {
+    width: 50%;
+    margin-bottom: 15px;
 }
 
-.btn-paired{
+.btn-paired {
     margin-right: 10px;
 }
 
-.panel-well{
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+.panel-well {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
 }
 
+.metismenu {
+    position: fixed;
+    width: 280px;
+    bottom: 0;
+    left: 0;
+    top: 0;
+}
+
+.content {
+    margin-left: 280px;
+}
