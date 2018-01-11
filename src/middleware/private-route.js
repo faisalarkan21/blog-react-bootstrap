@@ -6,9 +6,9 @@ import { tokenAuth } from './auth-cookies';
 import { checkAuth } from '../actions';
 
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) =>
   // console.log(tokenAuth.tokenAuthenticated());
-  return (
+  (
     <Route
       {...rest}
       render={propsRender => (
@@ -27,12 +27,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   )}
     />
   );
-};
-
-
-const LoginRoute = ({ component: Component, ...rest }) => {
+const PublicRoute = ({ component: Component, ...rest }) =>
   // console.log(tokenAuth.tokenAuthenticated());
-  return (
+  (
     <Route
       {...rest}
       render={props => (
@@ -43,21 +40,8 @@ const LoginRoute = ({ component: Component, ...rest }) => {
   )}
     />
   );
-};
-
-const IndexRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (
-      <Component
-        {...props}
-        isLoginAuthenticated={tokenAuth.tokenAuthenticated()}
-      />
-  )}
-  />
-);
 
 
 export {
-  PrivateRoute, LoginRoute, IndexRoute,
+  PrivateRoute, PublicRoute,
 };
