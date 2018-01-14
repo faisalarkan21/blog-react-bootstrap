@@ -15,17 +15,16 @@ const Dashboard = (props) => {
     <div>
       <Col id="login-panel" className="panel panel-default panel-well" xs={10} sm={5} md={5} lg={4} xsOffset={1} smOffset={3} mdOffset={3} lgOffset={4} >
         <div>
-          <h3 className="text-center"> Sign In <i className="fa fa-sign-in fa-lg" aria-hidden="true" />
+          <h3 className="text-center"> Sign In <i className="fa fa-sign-in fa-lg title-icon" aria-hidden="true" />
 
           </h3>
           <hr />
         </div>
         <Col className="inner-panel" xs={12} sm={9} md={10} lg={9} smOffset={1} lgOffset={1}>
           <form className="form-horizontal" onSubmit={handleSubmit(handleLogin)}>
-
             <Field
               name="email"
-              icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
+              icon={<i className="fa fa-envelope fa-lg pull-right" aria-hidden="true" />}
               component={FieldInput}
               type="numbers"
               placeholder="Email Anda"
@@ -34,39 +33,38 @@ const Dashboard = (props) => {
 
             <Field
               name="password"
-              icon={<i className="fa fa-eye-slash fa-lg" aria-hidden="true" />}
+              icon={<i className="fa fa-eye-slash fa-lg pull-right" aria-hidden="true" />}
               component={FieldInput}
               type="password"
               placeholder="Password Anda"
               validate={[required, minLength6]}
             />
 
-            <Col className="label-padding" lg={9} >
-              <Link to="/">Lupa Password ?</Link>
-            </Col>
-            <br />
-
-            {message ? (<ShowAlert
-              status={(false)}
-              message={message.errorMessage}
-            />
+            <div className="login-panel-bottom">
+              <Col className="label-padding" >
+                <Link to="/">Lupa Password ?</Link>
+              </Col>
+              {message ? (<ShowAlert
+                status={(false)}
+                message={message.errorMessage}
+              />
             ) : (
               <ShowAlert
                 status={(props.error === undefined
             && props.submitSucceeded)
             || props.error}
               />)}
-            <Col className="text-center">
-              <Button className="btn-form" type="submit" bsStyle="primary">Login</Button>
-            </Col>
-            <Col className="label-padding" lg={12} >
+
+              <Col className="text-center">
+                <Button className="btn-form" type="submit" bsStyle="primary">Login</Button>
+              </Col>
+              <Col className="label-padding" >
               Belum mendaftar  ? <Link to={linkDaftar} > Daftar disini. </Link>
-            </Col>
+              </Col>
+            </div>
           </form>
         </Col>
       </Col>
-
-
     </div>
   );
 };

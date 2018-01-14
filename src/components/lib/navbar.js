@@ -9,6 +9,8 @@ import {
   MenuItem,
   ListGroup,
   ListGroupItem,
+  DropdownButton,
+  Dropdown,
 } from 'react-bootstrap';
 import MetisMenu from 'react-metismenu';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -29,7 +31,7 @@ const content = [
   },
   {
     icon: 'newspaper-o',
-    label: 'Daftar Postingan',
+    label: 'Daftar Artikel',
     content: [
       {
         icon: 'tag',
@@ -60,7 +62,6 @@ const AppNav = class extends Component {
                 <Link to="/">Reacting Blog</Link>
               </Navbar.Brand>
             </Navbar.Header>
-
             <Nav>
               <NavItem eventKey={1} href="#">Link</NavItem>
               <NavItem eventKey={2} href="#">Link</NavItem>
@@ -79,23 +80,39 @@ const AppNav = class extends Component {
        ) : (
          <div>
            <ListGroup className="nav-profile">
-             <ListGroupItem className="nav-profile-inner" header="Dashboard">Faisal Arkan</ListGroupItem>
-
+             <ListGroupItem className="nav-profile-inner" header="React Bloging">Versi 0.9</ListGroupItem>
            </ListGroup>
-           <Navbar className="dashboard" fluid>
+           <Navbar className="nav-dashboard" fluid>
              <Navbar.Header>
-               <h3 className="title-nav ">Halaman Dashboard</h3>
+               <h3 className="title-nav">Halaman Dashboard</h3>
              </Navbar.Header>
-
-
              <Navbar.Form pullRight>
-               <IsLoggedButton {...this.props} />
+               <Dropdown
+                 title="Faisal Arkan"
+                 key={1}
+                 id={`dropdown-basic-${1}`}
+               >
+                 <Dropdown.Toggle>
+                   <i className="fa fa-cogs pull-left-mod" />
+                      Faisal Arkan
+                 </Dropdown.Toggle>
+                 <Dropdown.Menu className="super-colors">
+                   <MenuItem eventKey="1">
+                     <i className="fa fa-user-circle-o pull-left-mod" aria-hidden="true" />
+                   Profile Anda
+                   </MenuItem>
+                   <MenuItem divider />
+                   <MenuItem
+                     onClick={this.props.isPublicRoute ? this.props.toDashboard : this.props.logOut}
+                     eventKey="4"
+                   >
+                     <i className="fa fa-sign-out pull-left-mod" aria-hidden="true" />
+                     {this.props.isPublicRoute ? 'Dahsboard' : 'Logout' }
+                   </MenuItem>
+                 </Dropdown.Menu>
+               </Dropdown>
              </Navbar.Form>
-
-
            </Navbar>
-
-
            <MetisMenu
              className="nav-metis nav-inverse"
              content={content}
@@ -103,8 +120,6 @@ const AppNav = class extends Component {
              iconNameStateHidden="angle-double-left"
              iconNameStateVisible="angle-double-left rotate-minus-90"
            />
-
-
          </div>
        ) }
       </div>
@@ -114,6 +129,7 @@ const AppNav = class extends Component {
 
 const IsLoggedButton = props => (
   props.isLoginAuthenticated ? (
+
     <Button onClick={props.isPublicRoute ? props.toDashboard : props.logOut} >
       {props.isPublicRoute ? 'Dahsboard' : 'Logout' }
     </Button>

@@ -17,7 +17,7 @@ class SignUp extends React.Component {
       <div>
         <Col id="login-panel" className="panel panel-default panel-well" xs={10} sm={5} md={5} lg={4} xsOffset={1} smOffset={3} mdOffset={3} lgOffset={4} >
           <div>
-            <h3 className="text-center"> Sign Up <i className="fa fa-sign-in fa-lg" aria-hidden="true" />
+            <h3 className="text-center"> Sign Up <i className="fa fa-sign-in fa-lg title-icon" aria-hidden="true" />
             </h3>
             <hr />
           </div>
@@ -26,7 +26,7 @@ class SignUp extends React.Component {
 
               <Field
                 name="name"
-                icon={<i className="fa fa-user-circle fa-lg" aria-hidden="true" />}
+                icon={<i className="fa fa-user-circle fa-lg pull-right" aria-hidden="true" />}
                 component={FieldInput}
                 type="text"
                 placeholder="Nama Anda"
@@ -36,7 +36,7 @@ class SignUp extends React.Component {
 
               <Field
                 name="email"
-                icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
+                icon={<i className="fa fa-envelope fa-lg pull-right" aria-hidden="true" />}
                 component={FieldInput}
                 type="text"
                 placeholder="Email anda.."
@@ -45,7 +45,7 @@ class SignUp extends React.Component {
 
               <Field
                 name="password"
-                icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
+                icon={<i className="fa fa-lock fa-lg pull-right" aria-hidden="true" />}
                 component={FieldInput}
                 type="password"
                 placeholder="Password Anda"
@@ -54,7 +54,7 @@ class SignUp extends React.Component {
 
               <Field
                 name="passwordConfirm"
-                icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
+                icon={<i className="fa fa-lock fa-lg pull-right" aria-hidden="true" />}
                 component={FieldInput}
                 type="password"
                 placeholder="Konfirmasi Password"
