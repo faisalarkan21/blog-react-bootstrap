@@ -49,4 +49,7 @@ const loginAuth = (state = {
   }
 };
 
-export { callApi, loginAuth };
+export {
+  callApi,
+  loginAuth,
+};
