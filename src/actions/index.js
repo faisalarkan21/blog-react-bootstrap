@@ -67,15 +67,18 @@ const loginUser = value => ({
 
 export const loadLogin = value => async (dispatch) => {
   const res = await api.postLoginUser(value);
-  const { token } = res.data;
+  const { token, rows } = res.data;
+
   if (res.status === 200) {
-    tokenAuth.setCookies(token);
-    return dispatch(loginUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated(), location: '/dashboard' }));
+    const { email, username } = rows[0];
+    tokenAuth.setCookies(token, { email, username });
+    return dispatch(loginUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken, location: '/dashboard' }));
   }
+
   throw new SubmissionError({
     email: true,
     password: true,
-    _error: 'Password atau username salah.',
+    _error: 'Username atau Password salah.',
   });
 };
 
@@ -86,7 +89,12 @@ export const checkAuth = value => ({
 });
 
 export const loadCheckAuth = () => async (dispatch) => {
-  dispatch(checkAuth({ isLoginAuthenticated: tokenAuth.tokenAuthenticated() }));
+  console.log(tokenAuth.tokenAuthenticated());
+  const { dataToken, authToken } = tokenAuth.tokenAuthenticated();
+  dispatch(checkAuth({
+    isLoginAuthenticated: authToken,
+    dataToken,
+  }));
 };
 
 const logOutUser = value => ({
@@ -96,5 +104,5 @@ const logOutUser = value => ({
 
 export const loadLogOut = () => (dispatch) => {
   tokenAuth.eraseCookies();
-  dispatch(logOutUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated(), location: '/login' }));
+  dispatch(logOutUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken, location: '/login' }));
 };

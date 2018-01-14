@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppNav } from '../components/lib';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { tokenAuth } from '../middleware/auth-cookies';
+import { AppNav } from '../components/lib';
 import { loadLogOut, loadCheckAuth } from '../actions';
 
 
@@ -28,14 +28,16 @@ class NavBarContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(tokenAuth.tokenAuthenticated());
+    const { dataToken, authToken } = tokenAuth.tokenAuthenticated();
     const { isPublicRoute } = this.props;
     return (
       <AppNav
         isPublicRoute={isPublicRoute}
         toDashboard={this.handleDashboard}
         logOut={this.handleLogOut}
-        isLoginAuthenticated={tokenAuth.tokenAuthenticated()}
+        isLoginAuthenticated={authToken}
+        dataToken={dataToken}
       />
     );
   }

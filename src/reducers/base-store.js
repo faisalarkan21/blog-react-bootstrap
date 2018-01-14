@@ -23,9 +23,10 @@ const callApi = (state = '', action) => {
 
 const loginAuth = (state = {
   isLoginAuthenticated: false,
+  dataToken: '',
   location: '',
 }, action) => {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case ActionType.LOGIN_USER_API:
       return {
@@ -43,6 +44,7 @@ const loginAuth = (state = {
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
+        dataToken: action.payload.dataToken,
       };
     default:
       return state;

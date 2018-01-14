@@ -2,18 +2,27 @@ import Cookies from 'js-cookie';
 
 
 export const tokenAuth = {
-  setCookies(token) {
-    Cookies.set('token', token);
+  setCookies(token, data) {
+    Cookies.set('auth', token);
+    Cookies.set('data', data);
   },
   tokenAuthenticated() {
-    const token = Cookies.get('token');
-    if (token) {
-      return true;
+    const authToken = Cookies.get('auth');
+    const dataToken = Cookies.get('data');
+    if (authToken) {
+      return {
+        authToken: true,
+        dataToken: JSON.parse(dataToken),
+      };
     }
-    return false;
+    return {
+      authToken: false,
+      dataToken: '',
+    };
   },
   eraseCookies() {
-    Cookies.remove('token', { path: '' });
+    Cookies.remove('auth', { path: '' });
+    Cookies.remove('data', { path: '' });
   },
 
 };
