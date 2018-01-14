@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);
     const { result } = nextProps;
 
     if (!result.isLoginAuthenticated) {
@@ -32,6 +31,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    // console.log(this.props);
     return (
       <div>
         <NavBarContainer />

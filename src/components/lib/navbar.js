@@ -49,9 +49,9 @@ const content = [
 
 
 const AppNav = class extends Component {
-  // console.log(props);
   render() {
-    const { isPublicRoute } = this.props;
+    console.log(this.props);
+    const { isPublicRoute, dataToken } = this.props;
     return (
       <div>
         {isPublicRoute ? (
@@ -87,14 +87,10 @@ const AppNav = class extends Component {
                <h3 className="title-nav">Halaman Dashboard</h3>
              </Navbar.Header>
              <Navbar.Form pullRight>
-               <Dropdown
-                 title="Faisal Arkan"
-                 key={1}
-                 id={`dropdown-basic-${1}`}
-               >
+               <Dropdown id={`dropdown-basic-${1}`}>
                  <Dropdown.Toggle>
                    <i className="fa fa-cogs pull-left-mod" />
-                      Faisal Arkan
+                   {dataToken.username || null}
                  </Dropdown.Toggle>
                  <Dropdown.Menu className="super-colors">
                    <MenuItem eventKey="1">

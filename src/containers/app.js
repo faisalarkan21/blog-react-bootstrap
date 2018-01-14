@@ -22,7 +22,7 @@ class App extends React.Component {
 
   render() {
     console.log(this.props);
-    const { result, loadTestApi, isLoginAuthenticated } = this.props;
+    const { result, loadTestApi } = this.props;
 
     return (
       <div>
