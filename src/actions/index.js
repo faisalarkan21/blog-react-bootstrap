@@ -75,7 +75,7 @@ export const loadLogin = value => async (dispatch) => {
   throw new SubmissionError({
     email: true,
     password: true,
-    _error: 'Password atau username anda salah.',
+    _error: 'Password atau username salah.',
   });
 };
 
