@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) =>
     <Route
       {...rest}
       render={propsRender => (
-        tokenAuth.tokenAuthenticated() ? (
+        tokenAuth.tokenAuthenticated().authToken ? (
           <Component {...propsRender} />
     ) : (
       <Redirect to={{
@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) =>
   )}
     />
   );
-const PublicRoute = ({ component: Component, ...rest }) =>
+const LoginRoute = ({ component: Component, ...rest }) =>
   // console.log(tokenAuth.tokenAuthenticated());
   (
     <Route
@@ -35,7 +35,7 @@ const PublicRoute = ({ component: Component, ...rest }) =>
       render={props => (
         <Component
           {...props}
-          isLoginAuthenticated={tokenAuth.tokenAuthenticated()}
+          isLoginAuthenticated={tokenAuth.tokenAuthenticated().authToken}
         />
   )}
     />
@@ -43,5 +43,5 @@ const PublicRoute = ({ component: Component, ...rest }) =>
 
 
 export {
-  PrivateRoute, PublicRoute,
+  PrivateRoute, LoginRoute,
 };

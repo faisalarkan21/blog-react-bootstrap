@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes, { func } from 'prop-types';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { PrivateRoute, LoginRoute, PublicRoute } from '../middleware/private-route';
+import { PrivateRoute, LoginRoute } from '../middleware/middleware-route';
 
 import App from './app';
 import Signup from './signup';
@@ -12,9 +12,9 @@ import Dashboard from './dashboard';
 const Root = () => (
   <Router>
     <div>
-      <PublicRoute exact path="/" component={App} />
-      <PublicRoute path="/login" component={Login} />
-      <PublicRoute path="/daftar" component={Signup} />
+      <Route exact path="/" component={App} />
+      <LoginRoute path="/login" component={Login} />
+      <Route path="/daftar" component={Signup} />
       <PrivateRoute path="/dashboard" component={Dashboard} />
 
     </div>
