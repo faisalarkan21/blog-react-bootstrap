@@ -37,6 +37,13 @@ input {
     }
 }
 
+.btn{
+    text-transform: capitalize !important;
+}
+.caret{
+    margin-left: 5px !important;
+}
+
 .btn-form {
     margin-top: 10px;
     margin-bottom: 15px;
@@ -68,8 +75,9 @@ a {
 }
 
 .alert {
-    margin-top: 30px !important;
-    margin: 20px;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    margin: 10px;
 }
 
 .login-panel-bottom {
