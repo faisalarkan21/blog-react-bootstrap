@@ -12,6 +12,7 @@ import Root from './src/containers/root';
 import 'typeface-roboto'; 
 import './public/style/base.scss';
 import 'font-awesome/css/font-awesome.min.css';
+import './public/style/metismenu.css';
 
 
 
