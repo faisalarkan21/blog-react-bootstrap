@@ -7,9 +7,7 @@ import {
 class Dashboard extends Component {
   render() {
     return (
-      <div>
-
-
+      <div className="content">
         <Col id="post-panel" xs={5} md={5} lg={5}>
           <Panel header="Test Panel" bsStyle="primary">
             Ini dashboard

@@ -4,15 +4,17 @@ import { Panel, Col, Button, ButtonToolbar, HelpBlock, FormGroup, InputGroup, Co
 
 function FieldInput(props) {
   const {
-    icon, input, meta: {
+    icon, label, input, meta: {
       touched, error, warning, invalid,
     },
   } = props;
   return (
     <FormGroup validationState={touched && invalid === true ? 'error' : null}>
-      <InputGroup>
+      <InputGroup style={{ marginBottom: 15 }}>
         <InputGroup.Addon>{icon}
         </InputGroup.Addon>
+        <ControlLabel>{label}</ControlLabel>
+
         <FormControl
           {...props}
           onChange={input.onChange}

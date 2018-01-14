@@ -22,53 +22,47 @@ class SignUp extends React.Component {
             <hr />
           </div>
           <Col className="inner-panel" xs={12} sm={9} md={10} lg={9} smOffset={1} lgOffset={1}>
-            <form onSubmit={handleSubmit(handleSubmitApi)}>
-              <div>
-                <Field
-                  name="name"
-                  icon={<i className="fa fa-user-circle fa-lg" aria-hidden="true" />}
-                  component={FieldInput}
-                  type="text"
-                  placeholder="Nama Anda"
-                  validate={required}
-                />
-              </div>
+            <form className="form-horizontal" onSubmit={handleSubmit(handleSubmitApi)}>
 
-              <div>
-                <Field
-                  name="email"
-                  icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
-                  component={FieldInput}
-                  type="text"
-                  placeholder="Email anda.."
-                  validate={[required, email]}
-                />
-              </div>
+              <Field
+                name="name"
+                icon={<i className="fa fa-user-circle fa-lg" aria-hidden="true" />}
+                component={FieldInput}
+                type="text"
+                placeholder="Nama Anda"
+                validate={required}
+              />
 
-              <div>
-                <Field
-                  name="password"
-                  icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
-                  component={FieldInput}
-                  type="password"
-                  placeholder="Password Anda"
-                  validate={[required, minLength6, passwordConfirm]}
-                />
-              </div>
 
-              <div>
-                <Field
-                  name="passwordConfirm"
-                  icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
-                  component={FieldInput}
-                  type="password"
-                  placeholder="Konfirmasi Password"
-                  validate={[required, minLength6, passwordConfirm]}
-                />
-              </div>
+              <Field
+                name="email"
+                icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
+                component={FieldInput}
+                type="text"
+                placeholder="Email anda.."
+                validate={[required, email]}
+              />
+
+              <Field
+                name="password"
+                icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
+                component={FieldInput}
+                type="password"
+                placeholder="Password Anda"
+                validate={[required, minLength6, passwordConfirm]}
+              />
+
+              <Field
+                name="passwordConfirm"
+                icon={<i className="fa fa-lock fa-lg" aria-hidden="true" />}
+                component={FieldInput}
+                type="password"
+                placeholder="Konfirmasi Password"
+                validate={[required, minLength6, passwordConfirm]}
+              />
 
               <Col className="text-center">
-                <Button type="submit" className="btn-login" bsStyle="primary">Daftar</Button>
+                <Button type="submit" className="btn-form" bsStyle="primary">Daftar</Button>
               </Col>
             </form>
 

@@ -21,28 +21,25 @@ const Dashboard = (props) => {
           <hr />
         </div>
         <Col className="inner-panel" xs={12} sm={9} md={10} lg={9} smOffset={1} lgOffset={1}>
-          <form onSubmit={handleSubmit(handleLogin)}>
-            <div>
-              <Field
-                name="email"
-                icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
-                component={FieldInput}
-                type="numbers"
-                placeholder="Email Anda"
-                validate={[required, email]}
-              />
-            </div>
+          <form className="form-horizontal" onSubmit={handleSubmit(handleLogin)}>
 
-            <div>
-              <Field
-                name="password"
-                icon={<i className="fa fa-eye-slash fa-lg" aria-hidden="true" />}
-                component={FieldInput}
-                type="password"
-                placeholder="Password Anda"
-                validate={[required, minLength6]}
-              />
-            </div>
+            <Field
+              name="email"
+              icon={<i className="fa fa-envelope fa-lg" aria-hidden="true" />}
+              component={FieldInput}
+              type="numbers"
+              placeholder="Email Anda"
+              validate={[required, email]}
+            />
+
+            <Field
+              name="password"
+              icon={<i className="fa fa-eye-slash fa-lg" aria-hidden="true" />}
+              component={FieldInput}
+              type="password"
+              placeholder="Password Anda"
+              validate={[required, minLength6]}
+            />
 
             <Col className="label-padding" lg={9} >
               <Link to="/">Lupa Password ?</Link>
@@ -60,7 +57,7 @@ const Dashboard = (props) => {
             || props.error}
               />)}
             <Col className="text-center">
-              <Button className="btn-login" type="submit" bsStyle="primary">Login</Button>
+              <Button className="btn-form" type="submit" bsStyle="primary">Login</Button>
             </Col>
             <Col className="label-padding" lg={12} >
               Belum mendaftar  ? <Link to={linkDaftar} > Daftar disini. </Link>
