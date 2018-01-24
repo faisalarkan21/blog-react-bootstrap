@@ -27,7 +27,9 @@ const PrivateRoute = ({ component: Component, ...rest }) =>
   )}
     />
   );
-const LoginRoute = ({ component: Component, ...rest }) =>
+
+
+const IsLoggedRoute = ({ component: Component, ...rest }) =>
   // console.log(tokenAuth.tokenAuthenticated());
   (
     <Route
@@ -43,5 +45,5 @@ const LoginRoute = ({ component: Component, ...rest }) =>
 
 
 export {
-  PrivateRoute, LoginRoute,
+  PrivateRoute, IsLoggedRoute,
 };

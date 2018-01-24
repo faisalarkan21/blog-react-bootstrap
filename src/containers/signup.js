@@ -16,6 +16,13 @@ class SignUp extends React.Component {
     this.handleSubmitApi = this.handleSubmitApi.bind(this);
   }
 
+  componentWillMount() {
+    const { isLoginAuthenticated } = this.props;
+    if (isLoginAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
     setTimeout(() => {
