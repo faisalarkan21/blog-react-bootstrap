@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap';
 import MetisMenu from 'react-metismenu';
 import { LinkContainer } from 'react-router-bootstrap';
+import RouterLink from 'react-metismenu-router-link';
 
 
 const content = [
@@ -112,6 +113,7 @@ const AppNav = class extends Component {
            <MetisMenu
              className="nav-metis nav-inverse"
              content={content}
+             LinkComponent={RouterLink}
              activeLinkFromLocation
              iconNameStateHidden="angle-double-left"
              iconNameStateVisible="angle-double-left rotate-minus-90"
