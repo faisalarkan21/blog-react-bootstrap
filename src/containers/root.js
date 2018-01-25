@@ -6,8 +6,8 @@ import { PrivateRoute, IsLoggedRoute } from '../middleware/middleware-route';
 import App from './app';
 import Signup from './signup';
 import Login from './login';
-import Dashboard from './home';
-import Articles from './articles';
+import Home from './dashboard/home';
+import Articles from './dashboard/articles';
 
 
 const Root = () => (
@@ -16,7 +16,7 @@ const Root = () => (
       <Route exact path="/" component={App} />
       <IsLoggedRoute path="/login" component={Login} />
       <IsLoggedRoute path="/daftar" component={Signup} />
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      <PrivateRoute exact path="/dashboard" component={Home} />
       <PrivateRoute path="/dashboard/articles" component={Articles} />
 
     </div>

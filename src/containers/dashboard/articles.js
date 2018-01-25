@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DashboardLayout from './dashboard-layout';
 
-import ArticlesComponent from '../components/articles';
+import ArticlesComponent from '../../components/articles';
 
 class ContentList extends Component {
   render() {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 
-import { loadLogOut, loadCheckAuth } from '../actions';
-import NavBarContainer from './navbar-container';
+import { loadLogOut, loadCheckAuth } from '../../actions';
+import NavBarContainer from '../navbar-container';
 
 @connect(mapStateToProps, { loadLogOut, loadCheckAuth })
 @withRouter
