@@ -12,18 +12,16 @@ class ArticlesComponent extends Component {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
+                  <th>Judul</th>
+                  <th>Penulis</th>
+                  <th>Tanggal</th>
+                  <th>Total Disukai</th>
                   <th>Table heading</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
@@ -37,11 +35,9 @@ class ArticlesComponent extends Component {
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
-                  <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>

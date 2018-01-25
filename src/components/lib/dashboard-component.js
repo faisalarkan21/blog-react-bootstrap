@@ -9,7 +9,7 @@ class DashboardComponent extends Component {
   render() {
     return (
       <Row>
-        <Col className="dashboard-content" xs={8} md={8} lg={8}>
+        <Col className="dashboard-content" xs={12} md={12} lg={12}>
 
           {this.props.children}
 

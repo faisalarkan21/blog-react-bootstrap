@@ -28,7 +28,7 @@ const content = [
   {
     icon: 'user-circle ',
     label: 'Daftar Pengguna',
-    to: '#another-link',
+    to: '/dashboard/users',
   },
   {
     icon: 'newspaper-o',
