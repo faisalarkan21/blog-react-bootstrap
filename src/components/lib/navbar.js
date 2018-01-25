@@ -36,7 +36,7 @@ const content = [
       {
         icon: 'tag',
         label: 'Artikel Pemrograman',
-        to: '#another-link',
+        to: '/dashboard/articles',
       },
       {
         icon: 'tag',

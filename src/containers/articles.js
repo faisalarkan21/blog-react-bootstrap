@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import NavBarContainer from './navbar-container';
+import DashboardLayout from './dashboard-layout';
+
 import ArticlesComponent from '../components/articles';
 
 class ContentList extends Component {
   render() {
     return (
-
-
       <div>
-        <NavBarContainer />
-        <ArticlesComponent />
+        <DashboardLayout>
+          <ArticlesComponent />
+        </DashboardLayout>
       </div>
-
     );
   }
 }
