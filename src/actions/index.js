@@ -1,14 +1,9 @@
 import { SubmissionError } from 'redux-form';
 // import Cookies from 'js-cookie';
 import { tokenAuth } from '../middleware/auth-cookies';
-
 import * as api from '../middleware/api';
+import * as types from '../constants/ActionTypes';
 
-export const TEST_API = 'TEST_API';
-export const CREATE_USER_API = 'CREATE_USER_API';
-export const LOGIN_USER_API = 'LOGIN_USER_API';
-export const LOGOUT_USER = 'LOGOUT_USER';
-export const CHECK_AUTH = 'CHECK_AUTH';
 
 /**
  *  Test API
@@ -16,7 +11,7 @@ export const CHECK_AUTH = 'CHECK_AUTH';
  */
 
 const testApi = value => ({
-  type: TEST_API,
+  type: types.TEST_API,
   payload: value,
 });
 
@@ -36,7 +31,7 @@ export const loadTestApi = () => async (dispatch) => {
  */
 
 const createUser = (value, location) => ({
-  type: CREATE_USER_API,
+  type: types.CREATE_USER_API,
   payload: {
     res: value,
     location,
@@ -61,7 +56,7 @@ export const loadSignUp = value => async (dispatch) => {
  */
 
 const loginUser = value => ({
-  type: LOGIN_USER_API,
+  type: types.LOGIN_USER_API,
   payload: value,
 });
 
@@ -84,7 +79,7 @@ export const loadLogin = value => async (dispatch) => {
 
 
 export const checkAuth = value => ({
-  type: CHECK_AUTH,
+  type: types.CHECK_AUTH,
   payload: value,
 });
 
@@ -98,7 +93,7 @@ export const loadCheckAuth = () => async (dispatch) => {
 };
 
 const logOutUser = value => ({
-  type: LOGOUT_USER,
+  type: types.LOGOUT_USER,
   payload: value,
 });
 

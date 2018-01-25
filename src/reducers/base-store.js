@@ -1,16 +1,16 @@
-import * as ActionType from '../actions';
+import * as types from '../constants/ActionTypes';
 
 
 const callApi = (state = '', action) => {
   switch (action.type) {
-    case ActionType.TEST_API:
+    case types.TEST_API:
       return {
         ...state,
         codeResponse: `Code response : ${action.payload.status}`,
         message: action.payload.data.message,
         database: action.payload.data.database,
       };
-    case ActionType.CREATE_USER_API:
+    case types.CREATE_USER_API:
       return {
         ...state,
         res: action.payload,
@@ -28,19 +28,19 @@ const loginAuth = (state = {
 }, action) => {
   // console.log(action);
   switch (action.type) {
-    case ActionType.LOGIN_USER_API:
+    case types.LOGIN_USER_API:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
         location: action.payload.location,
       };
-    case ActionType.LOGOUT_USER:
+    case types.LOGOUT_USER:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
         location: action.payload.location,
       };
-    case ActionType.CHECK_AUTH:
+    case types.CHECK_AUTH:
       return {
         ...state,
         isLoginAuthenticated: action.payload.isLoginAuthenticated,
