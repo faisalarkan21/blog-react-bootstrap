@@ -6,8 +6,8 @@ import { PrivateRoute, IsLoggedRoute } from '../middleware/middleware-route';
 import App from './app';
 import Signup from './signup';
 import Login from './login';
-import Dashboard from './dashboard';
-import Articles from './content-list';
+import Dashboard from './home';
+import Articles from './articles';
 
 
 const Root = () => (
