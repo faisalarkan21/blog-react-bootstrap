@@ -7,6 +7,7 @@ const config = {
   entry: ['babel-polyfill', './index.js'], // entry point
   output: {
     filename: 'bundle.js', // place where bundled app will be served
+    publicPath: '/',
   },
   devServer: {
     historyApiFallback: true,
