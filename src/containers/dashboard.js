@@ -6,7 +6,7 @@ import NavBarContainer from './navbar-container';
 import { loadLogOut, loadCheckAuth } from '../actions';
 import { connect } from 'react-redux';
 
-import DashboardComponent from '../components/dashboard-component';
+import DashboardComponent from '../components/home';
 
 /* eslint no-use-before-define: ["error", { "functions": false }] */
 @connect(mapStateToProps, { loadLogOut, loadCheckAuth })
@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <NavBarContainer />
-        <DashboardComponent logOut={this.handleLogOut} />
+        <DashboardComponent />
       </div>
 
     );
