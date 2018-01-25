@@ -21,8 +21,8 @@ export const tokenAuth = {
     };
   },
   eraseCookies() {
-    Cookies.remove('auth', { path: '' });
-    Cookies.remove('data', { path: '' });
+    Cookies.remove('auth');
+    Cookies.remove('data');
   },
 
 };
