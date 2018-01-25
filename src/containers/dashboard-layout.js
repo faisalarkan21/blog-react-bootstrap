@@ -10,22 +10,15 @@ import NavBarContainer from './navbar-container';
 class DashboardLayout extends Component {
   constructor(props) {
     super(props);
-    this.handleLogOut = this.handleLogOut.bind(this);
     this.props.loadCheckAuth();
   }
 
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
-
     if (!result.isLoginAuthenticated) {
       this.props.history.push(result.location);
     }
   }
-
-  handleLogOut() {
-    this.props.loadLogOut();
-  }
-
 
   render() {
     return (
