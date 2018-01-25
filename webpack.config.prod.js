@@ -8,6 +8,7 @@ const config = {
   devtool: 'cheap-module-source-map',
   output: {
     filename: '[name].[chunkhash:8].js', // place where bundled app will be served
+    publicPath: '/',
   },
   devServer: {
     historyApiFallback: true,
