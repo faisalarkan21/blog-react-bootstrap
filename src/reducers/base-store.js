@@ -1,20 +1,34 @@
 import * as types from '../constants/ActionTypes';
 
 
-const callApi = (state = '', action) => {
+const initCallApi = {
+
+};
+
+
+const callApi = (state = {}, action) => {
+  console.log(action);
+  switch (action.type) {
+    case types.FETCH_API:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+const testApi = (state = {
+  message: '',
+  database: '',
+}, action) => {
   switch (action.type) {
     case types.TEST_API:
       return {
         ...state,
-        codeResponse: `Code response : ${action.payload.status}`,
-        message: action.payload.data.message,
-        database: action.payload.data.database,
-      };
-    case types.CREATE_USER_API:
-      return {
-        ...state,
-        res: action.payload,
-
+        message: action.payload.message,
+        database: action.payload.database,
       };
     default:
       return state;
@@ -54,4 +68,5 @@ const loginAuth = (state = {
 export {
   callApi,
   loginAuth,
+  testApi,
 };

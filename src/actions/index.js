@@ -16,16 +16,30 @@ const testApi = value => ({
 });
 
 
-export const loadTestApi = () => async (dispatch) => {
-  const res = await api.fetchApi();
-  if (res.status === 200) {
-    return dispatch(testApi(res));
+const fetchApi = value => ({
+  type: types.FETCH_API,
+  payload: value,
+});
+
+export const loadFetchApi = endpoint => async (dispatch) => {
+  const res = await api.fetchApi(endpoint);
+
+  if (endpoint === undefined) {
+    return dispatch(testApi(res.data));
   }
-  return dispatch(testApi(res));
+  return dispatch(fetchApi(res.data));
 };
 
+
 /**
- * Signup
+ * @description
+ * User Credential Part
+ *
+ */
+
+/**
+ * Signup New User Part
+ *
  * @param {*} value  response api
  * @param {*} endpoint URL Push -> react router
  */
@@ -52,7 +66,9 @@ export const loadSignUp = value => async (dispatch) => {
 };
 
 /**
- * @constant loginUser for action Login.
+ * Login
+ * @constant loginUser for action Login Part.
+ *
  */
 
 const loginUser = value => ({
@@ -77,6 +93,11 @@ export const loadLogin = value => async (dispatch) => {
   });
 };
 
+/**
+ * @description
+ * Check Authenticated User Token Part
+ *
+ */
 
 export const checkAuth = value => ({
   type: types.CHECK_AUTH,
@@ -91,6 +112,12 @@ export const loadCheckAuth = () => async (dispatch) => {
     dataToken,
   }));
 };
+
+/**
+ * @description
+ * Logout User Part
+ *
+ */
 
 const logOutUser = value => ({
   type: types.LOGOUT_USER,

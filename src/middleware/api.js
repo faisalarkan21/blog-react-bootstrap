@@ -4,14 +4,13 @@ import { SubmissionError } from 'redux-form';
 const axios = require('axios');
 
 const instanceAxios = axios.create({
-  baseURL: 'http://127.0.0.1:3001/api/',
   timeout: 1000,
 });
 
 
 const CREATE_USER = 'http://127.0.0.1:3001/api/users/create-user';
 const LOGIN_USER = 'http://127.0.0.1:3001/api/users/login';
-
+const API_ROOT = 'http://127.0.0.1:3001/api';
 
 const showResults = async () => {
   const result = await axios.get(API_ROOT).catch(err => console.error(`Bad request fetch get. \n${err}`));
@@ -20,8 +19,9 @@ const showResults = async () => {
 };
 
 
-const fetchApi = async (endpoint, values) => {
-  const result = await instanceAxios().catch((err) => {
+const fetchApi = async (endpoint = '', values) => {
+  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+  const result = await instanceAxios.get(fullUrl).catch((err) => {
     if (err) {
       return {
         status: '500',
@@ -35,6 +35,12 @@ const fetchApi = async (endpoint, values) => {
   });
   return result;
 };
+
+
+/**
+ *
+ * @param postCreateUser -> Making new User.
+ */
 
 const postCreateUser = async (values) => {
   const schema = {
@@ -55,6 +61,11 @@ const postCreateUser = async (values) => {
 
   return result;
 };
+
+/**
+ *
+ * @param postLoginUser -> Login User.
+ */
 
 const postLoginUser = async (values) => {
   const schema = {
