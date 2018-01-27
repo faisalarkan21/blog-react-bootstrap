@@ -15,6 +15,21 @@ const testApi = value => ({
   payload: value,
 });
 
+export const loadTestApi = endpoint => async (dispatch) => {
+  const res = await api.fetchApi(endpoint);
+
+  if (res.errorCode === 500) {
+    return dispatch(testApi({ data: { message: null, database: null } }));
+  }
+  return dispatch(testApi(res.data));
+};
+
+
+/**
+ *  Fetch API
+ * @param {*} value response api
+ *
+ */
 
 const fetchApi = value => ({
   type: types.FETCH_API,
@@ -23,9 +38,8 @@ const fetchApi = value => ({
 
 export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
-
-  if (endpoint === undefined) {
-    return dispatch(testApi(res.data));
+  if (res.errorCode === 500) {
+    return dispatch(fetchApi({ status: res.errorCode }));
   }
   return dispatch(fetchApi(res.data));
 };
@@ -54,14 +68,12 @@ const createUser = (value, location) => ({
 
 export const loadSignUp = value => async (dispatch) => {
   const res = await api.postCreateUser(value);
-
   if (res.data.code === '23505') {
     throw new SubmissionError({
       email: 'Email sudah terdaftar..',
       _error: 'Cek pengisian email.',
     });
   }
-
   return dispatch(createUser(res, '/login'));
 };
 

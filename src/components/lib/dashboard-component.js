@@ -10,12 +10,8 @@ class DashboardComponent extends Component {
     return (
       <Row>
         <Col className="dashboard-content" xs={12} md={12} lg={12}>
-
           {this.props.children}
-
-
         </Col>
-
       </Row>
     );
   }
