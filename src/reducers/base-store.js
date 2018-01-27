@@ -6,7 +6,7 @@ const initCallApi = {
 };
 
 
-const callApi = (state = {}, action) => {
+const callApi = (state = { data: [] }, action) => {
   console.log(action);
   switch (action.type) {
     case types.FETCH_API:
