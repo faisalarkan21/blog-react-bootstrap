@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from './dashboard-layout';
+
+import { momentFormat } from '../../middleware/moment-config';
 import UserListComponent from '../../components/users';
 import { loadFetchApi } from '../../actions';
 
@@ -12,8 +14,14 @@ class UserList extends Component {
   render() {
     console.log(this.props);
     const { result } = this.props;
-    return (
 
+    result.data.forEach((item) => {
+      item.created_on = momentFormat(item.created_on, 'MMMM Do YYYY');
+      item.last_login = item.last_login !== null ?
+        momentFormat(item.last_login, 'MMMM Do YYYY') : '-';
+    });
+
+    return (
       <div>
         <DashboardLayout>
           <UserListComponent {...result} />
