@@ -1,11 +1,6 @@
 import * as types from '../constants/ActionTypes';
 
 
-const initCallApi = {
-
-};
-
-
 const callApi = (state = { data: [] }, action) => {
   console.log(action);
   switch (action.type) {
@@ -20,15 +15,13 @@ const callApi = (state = { data: [] }, action) => {
 };
 
 const testApi = (state = {
-  message: '',
-  database: '',
+  data: { message: '', database: '' },
 }, action) => {
   switch (action.type) {
     case types.TEST_API:
       return {
         ...state,
-        message: action.payload.message,
-        database: action.payload.database,
+        data: action.payload,
       };
     default:
       return state;

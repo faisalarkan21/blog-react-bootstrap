@@ -4,7 +4,7 @@ import { SubmissionError } from 'redux-form';
 const axios = require('axios');
 
 const instanceAxios = axios.create({
-  timeout: 1000,
+  timeout: 2000,
 });
 
 
@@ -21,17 +21,13 @@ const showResults = async () => {
 
 const fetchApi = async (endpoint = '', values) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-  const result = await instanceAxios.get(fullUrl).catch((err) => {
-    if (err) {
+  const result = await instanceAxios.get(fullUrl).catch((error) => {
+    if (error) {
       return {
-        status: '500',
-        data: {
-          message: 'Hey we got this Ok!, check the API server!',
-          database: 'Internal server error.',
-        },
+        errorCode: 500,
       };
     }
-    return err;
+    return error;
   });
   return result;
 };

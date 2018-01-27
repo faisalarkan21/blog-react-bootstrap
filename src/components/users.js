@@ -16,7 +16,7 @@ class UserListComponent extends Component {
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Dibuat Tanggal</th>
-                <th>Terakhir Login</th>
+                <th>Hak Akses</th>
                 <th>Tindakan</th>
               </tr>
             </thead>
@@ -27,14 +27,14 @@ class UserListComponent extends Component {
                   <td className="text-capitalize">{item.username}</td>
                   <td>{item.email}</td>
                   <td>{item.created_on}</td>
-                  <td>{item.last_login}</td>
+                  <td>{item.role_id}</td>
                   <td>
                     <Button bsStyle="primary">Detail</Button>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </Table>;
+          </Table>
         </Col>
       </DashboardComponent>
 

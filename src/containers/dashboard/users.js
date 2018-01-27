@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from './dashboard-layout';
 
+import { ErrorPage, DataEmpty } from '../../components/lib';
 import { momentFormat } from '../../middleware/moment-config';
 import UserListComponent from '../../components/users';
 import { loadFetchApi } from '../../actions';
@@ -9,22 +10,33 @@ import { loadFetchApi } from '../../actions';
 @connect(mapStateToProps, { loadFetchApi })
 class UserList extends Component {
   componentWillMount() {
-    this.props.loadFetchApi('/users');
+    return this.props.loadFetchApi('/users');
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { data } = nextProps.result;
+    console.log(data);
+    if (data.status === 500) {
+      this.isDataNull = <ErrorPage />;
+    } else if (data.length === 0) {
+      this.isDataNull = <DataEmpty />;
+    } else {
+      data.forEach((item) => {
+        item.created_on = momentFormat(item.created_on, 'MMMM Do YYYY');
+        item.role_id = item.role_id !== 1 ?
+          'Penulis' : 'Administrator';
+      });
+      this.isDataNull = <UserListComponent {...nextProps.result} />;
+    }
+  }
+
+  isDataNull;
+
   render() {
-    console.log(this.props);
-    const { result } = this.props;
-
-    result.data.forEach((item) => {
-      item.created_on = momentFormat(item.created_on, 'MMMM Do YYYY');
-      item.last_login = item.last_login !== null ?
-        momentFormat(item.last_login, 'MMMM Do YYYY') : '-';
-    });
-
     return (
       <div>
         <DashboardLayout>
-          <UserListComponent {...result} />
+          {this.isDataNull}
         </DashboardLayout>
       </div>
 
