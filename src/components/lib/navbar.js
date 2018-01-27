@@ -85,7 +85,7 @@ const AppNav = class extends Component {
            </ListGroup>
            <Navbar className="nav-dashboard" fluid>
              <Navbar.Header>
-               <h3 className="title-nav">Halaman Dashboard</h3>
+               <h3 className="title-nav">Daftar Pengguna</h3>
              </Navbar.Header>
              <Navbar.Form pullRight>
                <Dropdown id={`dropdown-basic-${1}`}>

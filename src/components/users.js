@@ -8,7 +8,9 @@ class UserListComponent extends Component {
     console.log(data);
     return (
       <DashboardComponent>
-        <Col xs={8} md={8} lg={8}>
+        <Col className="panel-well-data" xs={8} md={8} lg={8}>
+          <h3>Pengguna Aktif</h3>
+          <br />
           <Table align="right" responsive>
             <thead>
               <tr>
@@ -35,6 +37,7 @@ class UserListComponent extends Component {
               ))}
             </tbody>
           </Table>
+
         </Col>
       </DashboardComponent>
 

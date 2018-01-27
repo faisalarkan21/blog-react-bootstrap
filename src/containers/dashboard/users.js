@@ -17,26 +17,26 @@ class UserList extends Component {
     const { data } = nextProps.result;
     console.log(data);
     if (data.status === 500) {
-      this.isDataNull = <ErrorPage />;
+      this.renderComponent = <ErrorPage />;
     } else if (data.length === 0) {
-      this.isDataNull = <DataEmpty />;
+      this.renderComponent = <DataEmpty />;
     } else {
       data.forEach((item) => {
         item.created_on = momentFormat(item.created_on, 'MMMM Do YYYY');
         item.role_id = item.role_id !== 1 ?
           'Penulis' : 'Administrator';
       });
-      this.isDataNull = <UserListComponent {...nextProps.result} />;
+      this.renderComponent = <UserListComponent {...nextProps.result} />;
     }
   }
 
-  isDataNull;
+  renderComponent;
 
   render() {
     return (
       <div>
         <DashboardLayout>
-          {this.isDataNull}
+          {this.renderComponent}
         </DashboardLayout>
       </div>
 

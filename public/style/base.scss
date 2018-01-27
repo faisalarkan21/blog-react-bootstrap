@@ -4,7 +4,9 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #FAFAFA
 }
+
 
 $font-input-size: 14px;
 $box-shadow-standard: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -95,7 +97,13 @@ a {
 }
 
 .panel-well {
-    box-shadow: $box-shadow-standard;
+    box-shadow: $box-shadow-standard !important;
+}
+
+.panel-well-data{
+    box-shadow: $box-shadow-standard !important;
+    padding: 30px;
+    background-color: #ffffff
 }
 
 .nav-dashboard {
@@ -115,11 +123,21 @@ a {
 
 .title-nav {
     color: #fff !important;
-    font-size: 23px;
+    font-size: 25px;
     font-weight: 500;
     height: 30px !important;
-    margin-left: 135px;
+    margin-left: 150px;
 }
+
+.dashboard-content {
+    margin-left: 310px;
+    margin-top: 115px;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
 
 .navbar-right {
     line-height: 40px;
@@ -134,10 +152,7 @@ a {
     top: 70px;
 }
 
-.dashboard-content {
-    margin-left: 280px;
-    margin-top: 8%;
-}
+
 
 .nav-metis {
     padding-top: 20px;
