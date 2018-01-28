@@ -9,26 +9,32 @@ import { loadFetchApi } from '../../actions';
 
 @connect(mapStateToProps, { loadFetchApi })
 class UserList extends Component {
+  constructor(props) {
+    super(props);
+    this.handleFetch = this.handleFetch.bind(this);
+  }
+
   componentWillMount() {
-    return this.props.loadFetchApi('/users');
+    this.handleFetch();
   }
 
   componentWillReceiveProps(nextProps) {
     const { data } = nextProps.result;
-    console.log(data);
+
     if (data.status === 500) {
       this.renderComponent = <ErrorPage />;
     } else if (data.length === 0) {
       this.renderComponent = <DataEmpty />;
     } else {
-      data.forEach((item) => {
-        item.created_on = momentFormat(item.created_on, 'MMMM Do YYYY');
-        item.role_id = item.role_id !== 1 ?
-          'Penulis' : 'Administrator';
-      });
-      this.renderComponent = <UserListComponent {...nextProps.result} />;
+      this.renderComponent =
+        <UserListComponent {...nextProps.result} handleRefresh={this.handleFetch} />;
     }
   }
+
+  handleFetch() {
+    this.props.loadFetchApi('/users');
+  }
+
 
   renderComponent;
 
