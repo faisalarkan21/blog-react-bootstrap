@@ -1,13 +1,19 @@
 import React from 'react';
-import { Panel, Col, Button, ButtonToolbar, HelpBlock, FormGroup, InputGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { HelpBlock, FormGroup, InputGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 
 function FieldInput(props) {
   const {
-    icon, label, input, meta: {
+    icon, type, label, input, meta: {
       touched, error, warning, invalid,
     },
   } = props;
+
+
+  if (type === 'text') {
+    input.value = input.value.replace(/(?:^|\s)\S/g, a => a.toUpperCase());
+  }
+
   return (
     <FormGroup validationState={touched && invalid === true ? 'error' : null}>
       <InputGroup style={{ marginBottom: 15 }}>
@@ -18,6 +24,7 @@ function FieldInput(props) {
         <FormControl
           {...props}
           onChange={input.onChange}
+          value={input.value}
         />
 
         <HelpBlock>{touched &&
