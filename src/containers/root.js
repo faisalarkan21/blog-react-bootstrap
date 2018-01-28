@@ -9,6 +9,7 @@ import Login from './login';
 import Home from './dashboard/home';
 import Articles from './dashboard/articles';
 import Users from './dashboard/users';
+import DetailUser from './dashboard/detail-user';
 
 
 const Root = () => (
@@ -20,6 +21,7 @@ const Root = () => (
       <PrivateRoute exact path="/dashboard" component={Home} />
       <PrivateRoute path="/dashboard/articles" component={Articles} />
       <PrivateRoute path="/dashboard/users" component={Users} />
+      <PrivateRoute path="/dashboard/user/:user_id" component={DetailUser} />
 
     </div>
   </Router>

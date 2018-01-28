@@ -7,7 +7,7 @@ class ErrorPage extends Component {
     return (
       <div>
         <DashboardComponent>
-          <Col xs={4} md={4} lg={4}>
+          <Col xs={5} md={5} lg={5}>
             <Panel bsStyle="danger">
               <Panel.Heading>
                 <Panel.Title componentClass="h3">Terjadi Kesalahan</Panel.Title>

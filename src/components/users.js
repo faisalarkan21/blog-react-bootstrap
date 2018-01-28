@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Panel, Col, Table, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { DashboardComponent } from './lib';
 
 class UserListComponent extends Component {
@@ -8,7 +9,7 @@ class UserListComponent extends Component {
     // console.log(this.props);
     return (
       <DashboardComponent>
-        <Col className="panel-well-data" xs={8} md={8} lg={8}>
+        <Col xs={12} md={12} lg={12}>
           <Col md={4} >
             <h3>Pengguna Aktif</h3>
           </Col>
@@ -40,14 +41,15 @@ class UserListComponent extends Component {
                     <td>{item.created_on}</td>
                     <td>{item.role_id}</td>
                     <td>
-                      <Button bsStyle="primary">Detail</Button>
+                      <LinkContainer to={`/dashboard/user/${item.user_id}`}>
+                        <Button bsStyle="primary">Detail</Button>
+                      </LinkContainer>
                     </td>
                   </tr>
               ))}
               </tbody>
             </Table>
           </Col>
-
         </Col>
       </DashboardComponent>
 
