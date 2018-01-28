@@ -39,7 +39,7 @@ input {
     }
 }
 
-.btn{
+ .btn  {
     text-transform: capitalize !important;
 }
 .caret{
@@ -107,7 +107,8 @@ a {
 .panel-well-data{
     box-shadow: $box-shadow-standard !important;
     padding: 30px;
-    background-color: #ffffff
+    
+    background-color: #ffffff;
 }
 
 .nav-dashboard {
@@ -136,6 +137,7 @@ a {
 .dashboard-content {
     margin-left: 310px;
     margin-top: 110px;
+   
 }
 
 .table > tbody > tr > td {
@@ -156,7 +158,9 @@ a {
     top: 70px;
 }
 
-
+.margin-bottom-extra{
+    margin-bottom: 30px;
+}
 
 .nav-metis {
     padding-top: 20px;
