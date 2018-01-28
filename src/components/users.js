@@ -6,10 +6,10 @@ import { DashboardComponent } from './lib';
 class UserListComponent extends Component {
   render() {
     const { data } = this.props;
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <DashboardComponent>
-        <Col xs={12} md={12} lg={12}>
+        <Col className="panel-well-data" xs={12} md={12} lg={12}>
           <Col md={4} >
             <h3>Pengguna Aktif</h3>
           </Col>
@@ -20,6 +20,7 @@ class UserListComponent extends Component {
             </Button>
           </Col>
           <Col md={12}>
+          
             <br />
             <Table align="right" responsive>
               <thead>

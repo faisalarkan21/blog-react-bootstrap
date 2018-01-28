@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'redux';
-import { Field, reduxForm, change } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, initialize } from 'redux-form';
 import { Col, Button, Alert } from 'react-bootstrap';
 
 
@@ -10,60 +10,114 @@ import { required, email, minLength6, passwordConfirm } from '../middleware/rule
 
 class DetailUser extends Component {
   componentWillReceiveProps(nextProps) {
-    this.props.dispatch(change('formDetailUser', 'email', 'asas'));
+    console.log(nextProps);
+    const { data } = nextProps;
+
+    console.log(data);
+
+    this.props.dispatch(initialize(
+      'formDetailUser',
+      {
+        username: data.username,
+        email: data.email,
+        role_id: data.role_id,
+        grant_date: data.grant_date,
+        created_on: data.created_on,
+        last_login: data.last_login,
+      }, { keepDirty: true },
+    ));
   }
 
   render() {
-    // console.log(this.props);
-    // this.props.change('name', 'aasas');
     return (
       <DashboardComponent>
-        <Col className="inner-panel" xs={4} sm={4} md={4} lg={4}>
-          <h3>Detail Data</h3>
-          <br />
-          <form className="form-horizontal">
-            <Field
-              name="name"
-              icon={<i className="fa fa-user-circle fa-lg pull-right" aria-hidden="true" />}
-              component={FieldInput}
-              type="text"
-              placeholder="Nama Anda"
-              validate={required}
-            />
+        <Col className="panel-well-data" xs={11} sm={11} md={11} lg={11}>
+          <Col md={5} >
+            <h3>Detail Data</h3>
+          </Col>
+          <Col mdOffset={3} md={4}>
+            <br />
+            <Button type="submit" bsStyle="primary">Simpan Data
+              <i className="fa fa-refresh pull-right-mod" aria-hidden="true" />
+            </Button>
+          </Col>
 
 
-            <Field
-              name="email"
-              icon={<i className="fa fa-envelope fa-lg pull-right" aria-hidden="true" />}
-              component={FieldInput}
-              type="text"
-              placeholder="Email anda.."
-              validate={[required, email]}
-            />
+          <Col className="margin-bottom-extra" xs={11} sm={11} md={11} lg={11}>
+            <hr />
 
-            <Field
-              name="password"
-              icon={<i className="fa fa-lock fa-lg pull-right" aria-hidden="true" />}
-              component={FieldInput}
-              type="password"
-              placeholder="Password Anda"
-              validate={[required, minLength6, passwordConfirm]}
-            />
+            <form className="form-horizontal">
+              <Col xs={5} sm={5} md={5} lg={5}>
+                <Field
+                  name="username"
+                  icon={<i className="fa fa-user-circle fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Nama Pengguna"
+                  placeholder="Nama Anda"
+                  validate={required}
+                />
 
-            <Field
-              name="passwordConfirm"
-              icon={<i className="fa fa-lock fa-lg pull-right" aria-hidden="true" />}
-              component={FieldInput}
-              type="password"
-              placeholder="Konfirmasi Password"
-              validate={[required, minLength6, passwordConfirm]}
-            />
 
-            <Col className="text-center">
-              <Button type="submit" className="btn-form" bsStyle="primary">Daftar</Button>
-            </Col>
-          </form>
+                <Field
+                  name="email"
+                  icon={<i className="fa fa-envelope fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="email"
+                  label="Email"
+                  placeholder="Email anda.."
+                  validate={[required, email]}
+                />
 
+                <Field
+                  name="role_id"
+                  icon={<i className="fa fa-shield fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Hak Akses"
+                  placeholder="Hak Akses"
+                  validate={[required, minLength6, passwordConfirm]}
+                />
+              </Col>
+              <Col mdOffset={1} xs={5} sm={5} md={5} lg={5}>
+                <Field
+                  name="grant_date"
+                  icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Diberikan Akses Tanggal"
+                  placeholder="Akses tanggal"
+                  readOnly
+                  validate={required}
+                />
+
+
+                <Field
+                  name="created_on"
+                  icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Akun Dibuat Tanggal"
+                  placeholder="Dibuat Tanggal"
+                  readOnly
+                  validate={[required, email]}
+                />
+
+                <Field
+                  name="last_login"
+                  icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Terakhir Login"
+                  placeholder="Terakhir login"
+                  readOnly
+                  validate={[required, minLength6, passwordConfirm]}
+                />
+              </Col>
+
+
+            </form>
+          </Col>
           <ShowAlert
             status={(this.props.error === undefined
             && this.props.submitSucceeded)
@@ -80,8 +134,5 @@ DetailUser = reduxForm({
   form: 'formDetailUser',
 })(DetailUser);
 
-// DetailUser = connect(state => ({
-//   DetailUser: this.props.data, // pull initial values from account reducer
-// }))(DetailUser);
 
 export default DetailUser;
