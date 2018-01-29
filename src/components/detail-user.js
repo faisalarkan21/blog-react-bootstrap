@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, initialize } from 'redux-form';
-import { Col, Button, Alert } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 
 
-import { DashboardComponent, FieldInput, AlertInstance, ShowAlert } from './lib';
+import { DashboardComponent, FieldInput, ShowAlert } from './lib';
 import { required, email, minLength6, passwordConfirm } from '../middleware/rules-validator';
 
 
@@ -73,7 +73,7 @@ class DetailUser extends Component {
                   name="role_id"
                   icon={<i className="fa fa-shield fa-lg pull-right" aria-hidden="true" />}
                   component={FieldInput}
-                  type="text"
+                  type="select"
                   label="Hak Akses"
                   placeholder="Hak Akses"
                   validate={[required, minLength6, passwordConfirm]}
