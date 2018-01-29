@@ -29,6 +29,12 @@ class DetailUser extends Component {
   }
 
   render() {
+    const {
+      handleSubmit, handleUpdate,
+    } = this.props;
+
+    console.log(this.props);
+
     return (
       <DashboardComponent>
         <Col className="panel-well-data" xs={11} sm={11} md={11} lg={11}>
@@ -37,7 +43,7 @@ class DetailUser extends Component {
           </Col>
           <Col mdOffset={3} md={4}>
             <br />
-            <Button type="submit" bsStyle="primary">Simpan Data
+            <Button type="submit" bsStyle="primary"> Data
               <i className="fa fa-refresh pull-right-mod" aria-hidden="true" />
             </Button>
           </Col>
@@ -46,7 +52,7 @@ class DetailUser extends Component {
           <Col className="margin-bottom-extra" xs={11} sm={11} md={11} lg={11}>
             <hr />
 
-            <form className="form-horizontal">
+            <form className="form-horizontal" onSubmit={handleSubmit(handleUpdate)} >
               <Col xs={5} sm={5} md={5} lg={5}>
                 <Field
                   name="username"
