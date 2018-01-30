@@ -26,10 +26,22 @@ export const loadTestApi = endpoint => async (dispatch) => {
 
 
 /**
+ *  Loading action
+ * @param {*} bool loading parameter true or false
+ *
+ */
+
+export const loadIsLoading = bool => ({
+  type: types.IS_LOADING,
+  payload: bool,
+});
+
+/**
  *  Fetch API
  * @param {*} value response api
  *
  */
+
 
 const fetchApi = value => ({
   type: types.FETCH_API,
@@ -38,10 +50,33 @@ const fetchApi = value => ({
 
 export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
-  if (res.errorCode === 500) {
-    return dispatch(fetchApi({ status: res.errorCode }));
+  console.log(res);
+  dispatch(loadIsLoading(true));
+  if (res.status === 200) {
+    dispatch(fetchApi(res.data));
+    return dispatch(loadIsLoading(false));
   }
-  return dispatch(fetchApi(res.data));
+  return dispatch(fetchApi({ status: res.errorCode }));
+};
+
+
+/**
+ * Post Api
+ *
+ */
+
+
+const postApi = value => ({
+  type: types.POST_API,
+  payload: value,
+});
+
+export const loadPostApi = endpoint => async (dispatch) => {
+  const res = await api.postApi(endpoint);
+  if (res.errorCode === 500) {
+    return dispatch(postApi({ status: res.errorCode }));
+  }
+  return dispatch(postApi(res.data));
 };
 
 

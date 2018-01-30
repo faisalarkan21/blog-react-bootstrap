@@ -9,10 +9,25 @@ const callApi = (state = { data: [] }, action) => {
         ...state,
         data: action.payload,
       };
+    case types.POST_API:
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }
 };
+
+const isLoading = (state = { isLoading: false }, action) => {
+  switch (action.type) {
+    case types.IS_LOADING:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 
 const testApi = (state = {
   data: { message: '', database: '' },
@@ -62,4 +77,5 @@ export {
   callApi,
   loginAuth,
   testApi,
+  isLoading,
 };

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { callApi, loginAuth, testApi } from './base-store';
+import { callApi, loginAuth, testApi, isLoading } from './base-store';
 
 
 const allReducers = combineReducers({
@@ -8,6 +8,7 @@ const allReducers = combineReducers({
   callApi,
   loginAuth,
   testApi,
+  isLoading,
 });
 
 
