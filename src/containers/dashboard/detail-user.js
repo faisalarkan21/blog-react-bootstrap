@@ -3,24 +3,35 @@ import { connect } from 'react-redux';
 
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
-import { loadFetchApi } from '../../actions';
+import { loadPostApi, loadFetchApi, loadIsLoading } from '../../actions';
 
-@connect(mapStateToProps, { loadFetchApi })
+@connect(mapStateToProps, { loadPostApi, loadFetchApi, loadIsLoading })
 class DetailUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillMount() {
     const { params } = this.props.match;
     console.log(params);
     this.props.loadFetchApi(`/users/${params.user_id}`);
   }
 
+  handleSubmit(value) {
+    console.log(value);
+  }
+
 
   render() {
-    const { result } = this.props;
-
+    const { isLoading, result } = this.props;
+    if (isLoading) {
+      return null;
+    }
     return (
       <div>
         <DashboardLayout>
-          <DetailUserComponent {...result} />
+          <DetailUserComponent handleUpdate={this.handleSubmit} {...result} />;
         </DashboardLayout>
       </div>
 
@@ -31,6 +42,7 @@ class DetailUser extends React.Component {
 function mapStateToProps(state) {
   return {
     result: state.callApi,
+    isLoading: state.isLoading,
   };
 }
 

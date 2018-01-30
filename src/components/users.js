@@ -6,7 +6,7 @@ import { DashboardComponent } from './lib';
 class UserListComponent extends Component {
   render() {
     const { data } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <DashboardComponent>
         <Col className="panel-well-data" xs={12} md={12} lg={12}>

@@ -51,7 +51,7 @@ const content = [
 
 const AppNav = class extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { isPublicRoute, dataToken } = this.props;
     return (
       <div>

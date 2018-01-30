@@ -4,7 +4,12 @@ import { HelpBlock, FormGroup, InputGroup, ControlLabel, FormControl } from 'rea
 
 const SelectComponent = props => (
 
-  <FormControl value={props.input.value} componentClass="select" placeholder="select">
+  <FormControl
+    onChange={props.input.onChange}
+    value={props.input.value}
+    componentClass="select"
+    placeholder="select"
+  >
     <option value="Administrator">Administrator</option>
     <option value="Penulis">Penulis</option>
   </FormControl>

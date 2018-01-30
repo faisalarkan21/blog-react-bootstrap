@@ -9,9 +9,21 @@ import { required, email, minLength6, passwordConfirm } from '../middleware/rule
 
 
 class DetailUser extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    const { data } = nextProps;
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps);
+  //
+  // }
+
+
+  componentWillMount() {
+    this.handleInitialize();
+  }
+  // componentDidMount() {
+  //   this.handleInitialize();
+  // }
+
+  handleInitialize() {
+    const { data } = this.props;
 
     console.log(data);
 
@@ -28,6 +40,7 @@ class DetailUser extends Component {
     ));
   }
 
+
   render() {
     const {
       handleSubmit, handleUpdate,
@@ -41,18 +54,19 @@ class DetailUser extends Component {
           <Col md={5} >
             <h3>Detail Data</h3>
           </Col>
-          <Col mdOffset={3} md={4}>
-            <br />
-            <Button type="submit" bsStyle="primary"> Data
-              <i className="fa fa-refresh pull-right-mod" aria-hidden="true" />
-            </Button>
-          </Col>
+          <form className="form-horizontal" onSubmit={handleSubmit(handleUpdate)} >
+            <Col mdOffset={3} md={4}>
+              <br />
+              <Button type="submit" bsStyle="primary"> Simpan Data
+                <i className="fa fa-refresh pull-right-mod" aria-hidden="true" />
+              </Button>
+
+            </Col>
 
 
-          <Col className="margin-bottom-extra" xs={11} sm={11} md={11} lg={11}>
-            <hr />
+            <Col className="margin-bottom-extra" xs={11} sm={11} md={11} lg={11}>
+              <hr />
 
-            <form className="form-horizontal" onSubmit={handleSubmit(handleUpdate)} >
               <Col xs={5} sm={5} md={5} lg={5}>
                 <Field
                   name="username"
@@ -62,6 +76,7 @@ class DetailUser extends Component {
                   label="Nama Pengguna"
                   placeholder="Nama Anda"
                   validate={required}
+                  readOnly
                 />
 
 
@@ -73,6 +88,7 @@ class DetailUser extends Component {
                   label="Email"
                   placeholder="Email anda.."
                   validate={[required, email]}
+                  readOnly
                 />
 
                 <Field
@@ -83,6 +99,7 @@ class DetailUser extends Component {
                   label="Hak Akses"
                   placeholder="Hak Akses"
                   validate={[required, minLength6, passwordConfirm]}
+
                 />
               </Col>
               <Col mdOffset={1} xs={5} sm={5} md={5} lg={5}>
@@ -94,7 +111,7 @@ class DetailUser extends Component {
                   label="Diberikan Akses Tanggal"
                   placeholder="Akses tanggal"
                   readOnly
-                  validate={required}
+
                 />
 
 
@@ -106,7 +123,7 @@ class DetailUser extends Component {
                   label="Akun Dibuat Tanggal"
                   placeholder="Dibuat Tanggal"
                   readOnly
-                  validate={[required, email]}
+
                 />
 
                 <Field
@@ -117,18 +134,18 @@ class DetailUser extends Component {
                   label="Terakhir Login"
                   placeholder="Terakhir login"
                   readOnly
-                  validate={[required, minLength6, passwordConfirm]}
+
                 />
               </Col>
 
 
-            </form>
-          </Col>
-          <ShowAlert
-            status={(this.props.error === undefined
+            </Col>
+            <ShowAlert
+              status={(this.props.error === undefined
             && this.props.submitSucceeded)
             || this.props.error}
-          />
+            />
+          </form>
         </Col>
       </DashboardComponent>
     );
@@ -136,9 +153,8 @@ class DetailUser extends Component {
 }
 
 
-DetailUser = reduxForm({
+export default reduxForm({
   form: 'formDetailUser',
+  // enableReinitialize: true,
 })(DetailUser);
 
-
-export default DetailUser;
