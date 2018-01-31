@@ -38,7 +38,7 @@ class SignUp extends React.Component {
                 name="email"
                 icon={<i className="fa fa-envelope fa-lg pull-right" aria-hidden="true" />}
                 component={FieldInput}
-                type="text"
+                type="email"
                 placeholder="Email anda.."
                 validate={[required, email]}
               />
