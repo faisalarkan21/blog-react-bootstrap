@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
+import { ErrorPage, DataEmpty } from '../../components/lib';
 import { loadPostApi, loadFetchApi, loadIsLoading } from '../../actions';
 
 @connect(mapStateToProps, { loadPostApi, loadFetchApi, loadIsLoading })
@@ -27,13 +28,24 @@ class DetailUser extends React.Component {
   render() {
     const { isLoading, result } = this.props;
     console.log(this.props);
+
+    let renderComponent = null;
+
     if (isLoading) {
       return null;
+    } else if (result.status === 500) {
+      renderComponent = <ErrorPage />;
+    } else if (result.status === 404) {
+      renderComponent = <DataEmpty />;
+    } else {
+      renderComponent =
+        <DetailUserComponent handleUpdate={this.handleSubmit} {...result} />;
     }
+
     return (
       <div>
         <DashboardLayout>
-          <DetailUserComponent handleUpdate={this.handleSubmit} {...result} />;
+          {renderComponent}
         </DashboardLayout>
       </div>
 
