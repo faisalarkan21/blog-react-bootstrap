@@ -23,9 +23,9 @@ class UserList extends Component {
   //   console.log(info);
   // }
 
-  // componentWillReceiveProps(nextProps) {
-  //   this.handleFetch();
-  // }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
 
 
   handleFetch() {
@@ -36,7 +36,7 @@ class UserList extends Component {
   render() {
     const { isLoading, result } = this.props;
     // console.log(isLoading);
-    console.log(result);
+    console.log(this.props);
     // console.log(typeof result.data);
     if (isLoading === true) {
       return null;

@@ -42,15 +42,12 @@ export const loadIsLoading = bool => ({
  *
  */
 
-const fetchApiArray = dataArray => ({
-  type: types.FETCH_API_ARRAY,
+const fetchApi = (dataArray, dataObject) => ({
+  type: types.FETCH_API,
   dataArray,
-});
-
-const fetchApiObject = dataObject => ({
-  type: types.FETCH_API_OBJECT,
   dataObject,
 });
+
 
 export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
@@ -58,14 +55,13 @@ export const loadFetchApi = endpoint => async (dispatch) => {
   dispatch(loadIsLoading(true));
   if (res.status === 200) {
     if (res.data.length > 1) {
-      dispatch(fetchApiArray(res.data));
+      dispatch(fetchApi(res.data, {}));
       return dispatch(loadIsLoading(false));
     }
-    dispatch(fetchApiObject(res.data));
+    dispatch(fetchApi([], res.data));
     return dispatch(loadIsLoading(false));
   }
-  dispatch(fetchApiObject({ status: res.errorCode }));
-  return dispatch(fetchApiArray({ status: res.errorCode }));
+  return dispatch(fetchApi({ status: res.errorCode }));
 };
 
 

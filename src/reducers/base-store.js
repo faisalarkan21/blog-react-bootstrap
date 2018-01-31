@@ -2,17 +2,13 @@ import * as types from '../constants/ActionTypes';
 
 
 const callApi = (state = { dataArray: [], dataObject: {} }, action) => {
-  console.log(action);
   const { dataArray, dataObject } = action;
+  console.log(dataArray);
   switch (action.type) {
-    case types.FETCH_API_ARRAY:
+    case types.FETCH_API:
       return {
         ...state,
         dataArray,
-      };
-    case types.FETCH_API_OBJECT:
-      return {
-        ...state,
         dataObject,
       };
     case types.POST_API:
