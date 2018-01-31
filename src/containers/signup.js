@@ -32,7 +32,7 @@ class SignUp extends React.Component {
   }
 
   handleSubmitApi(value) {
-    return this.props.loadSignUp(value);
+    return this.props.loadSignUp('/users/create-user', value);
   }
 
   render() {

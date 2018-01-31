@@ -39,7 +39,7 @@ class Login extends React.Component {
         this.props.history.replace({ ...history.location, location });
       }, 200);
     }
-    return this.props.loadLogin(value);
+    return this.props.loadLogin('/users/login', value);
   }
 
   render() {

@@ -126,8 +126,8 @@ const createUser = (dataObject, location) => ({
   location,
 });
 
-export const loadSignUp = value => async (dispatch) => {
-  const res = await api.postCreateUser(value);
+export const loadSignUp = (endpoint, value) => async (dispatch) => {
+  const res = await api.postApi(endpoint, value);
   if (res.data.code === '23505') {
     throw new SubmissionError({
       email: 'Email sudah terdaftar..',
@@ -149,8 +149,8 @@ const loginUser = value => ({
   payload: value,
 });
 
-export const loadLogin = value => async (dispatch) => {
-  const res = await api.postLoginUser(value);
+export const loadLogin = (endpoint, value) => async (dispatch) => {
+  const res = await api.postApi(endpoint, value);
   const { token, rows } = res.data;
   console.log(res);
   if (res.status === 200) {
