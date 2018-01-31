@@ -25,8 +25,9 @@ class SignUp extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
+    console.log(result);
     setTimeout(() => {
-      this.props.history.push(result.res.location);
+      this.props.history.push(result.dataObject.location);
     }, 3000);
   }
 

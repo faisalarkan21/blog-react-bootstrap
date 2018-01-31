@@ -5,44 +5,53 @@ import DashboardLayout from './dashboard-layout';
 import { ErrorPage, DataEmpty } from '../../components/lib';
 import { momentFormat } from '../../middleware/moment-config';
 import UserListComponent from '../../components/users';
-import { loadFetchApi } from '../../actions';
+import { loadFetchApi, loadIsLoading } from '../../actions';
 
-@connect(mapStateToProps, { loadFetchApi })
+@connect(mapStateToProps, { loadFetchApi, loadIsLoading })
 class UserList extends Component {
   constructor(props) {
     super(props);
     this.handleFetch = this.handleFetch.bind(this);
   }
 
-  componentWillMount() {
-    this.handleFetch();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { data } = nextProps.result;
-
-    if (data.status === 500) {
-      this.renderComponent = <ErrorPage />;
-    } else if (data.length === 0) {
-      this.renderComponent = <DataEmpty />;
-    } else {
-      this.renderComponent =
-        <UserListComponent {...nextProps.result} handleRefresh={this.handleFetch} />;
-    }
-  }
-
-  handleFetch() {
+  componentDidMount() {
+    this.props.loadIsLoading(true);
     this.props.loadFetchApi('/users');
   }
+  // componentDidCatch(error, info) {
+  //   console.log(error);
+  //   console.log(info);
+  // }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.handleFetch();
+  // }
 
 
-  renderComponent;
+  handleFetch() {
+
+  }
+
 
   render() {
+    const { isLoading, result } = this.props;
+    // console.log(isLoading);
+    console.log(result);
+    // console.log(typeof result.data);
+    if (isLoading === true) {
+      return null;
+    }
+
+
+    // if (result.data.status === 500) {
+    //   return <ErrorPage />;
+    // }
+
+
     return (
       <div>
         <DashboardLayout>
-          {this.renderComponent}
+          <UserListComponent {...result} handleRefresh={this.handleFetch} />
         </DashboardLayout>
       </div>
 
@@ -53,6 +62,8 @@ class UserList extends Component {
 function mapStateToProps(state) {
   return {
     result: state.callApi,
+    isLoading: state.isLoading,
+
   };
 }
 

@@ -18,6 +18,7 @@ class DetailUser extends React.Component {
     this.props.loadFetchApi(`/users/${params.user_id}`);
   }
 
+
   handleSubmit(value) {
     console.log(value);
   }
@@ -25,6 +26,7 @@ class DetailUser extends React.Component {
 
   render() {
     const { isLoading, result } = this.props;
+    console.log(this.props);
     if (isLoading) {
       return null;
     }

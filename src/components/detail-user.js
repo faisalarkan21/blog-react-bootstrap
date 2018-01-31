@@ -23,30 +23,29 @@ class DetailUser extends Component {
   // }
 
   handleInitialize() {
-    const { data } = this.props;
+    const { dataObject } = this.props;
 
-    console.log(data);
+    // console.log(data);
 
     this.props.dispatch(initialize(
       'formDetailUser',
       {
-        username: data.username,
-        email: data.email,
-        role_id: data.role_id,
-        grant_date: data.grant_date,
-        created_on: data.created_on,
-        last_login: data.last_login,
+        username: dataObject.username,
+        email: dataObject.email,
+        role_id: dataObject.role_id,
+        grant_date: dataObject.grant_date,
+        created_on: dataObject.created_on,
+        last_login: dataObject.last_login,
       }, { keepDirty: true },
     ));
   }
-
 
   render() {
     const {
       handleSubmit, handleUpdate,
     } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <DashboardComponent>

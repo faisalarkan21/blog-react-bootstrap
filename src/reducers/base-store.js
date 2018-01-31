@@ -1,25 +1,32 @@
 import * as types from '../constants/ActionTypes';
 
 
-const callApi = (state = { data: [] }, action) => {
+const callApi = (state = { dataArray: [], dataObject: {} }, action) => {
   console.log(action);
+  const { dataArray, dataObject } = action;
   switch (action.type) {
-    case types.FETCH_API:
+    case types.FETCH_API_ARRAY:
       return {
         ...state,
-        data: action.payload,
+        dataArray,
+      };
+    case types.FETCH_API_OBJECT:
+      return {
+        ...state,
+        dataObject,
       };
     case types.POST_API:
       return {
         ...state,
-        data: action.payload,
+        dataObject,
       };
     default:
       return state;
   }
 };
 
-const isLoading = (state = { isLoading: false }, action) => {
+const isLoading = (state = false, action) => {
+  // console.log(action);
   switch (action.type) {
     case types.IS_LOADING:
       return action.payload;
@@ -27,7 +34,6 @@ const isLoading = (state = { isLoading: false }, action) => {
       return state;
   }
 };
-
 
 const testApi = (state = {
   data: { message: '', database: '' },

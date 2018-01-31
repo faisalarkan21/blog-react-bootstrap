@@ -5,13 +5,13 @@ import rootReducers from '../reducers';
 
 
 const logger = createLogger({
-  logErrors: false,
+
 });
 
 /* eslint-disable no-underscore-dangle */
 const configureStore = createStore(
   rootReducers,
-  applyMiddleware(logger, thunk),
+  applyMiddleware(thunk, logger),
 
 );
 

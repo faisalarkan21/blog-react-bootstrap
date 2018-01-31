@@ -1,5 +1,5 @@
-export const FETCH_API = 'FETCH_API';
-export const RESET_FETCH_API = 'RESET_FETCH_API';
+export const FETCH_API_ARRAY = 'FETCH_API_ARRAY';
+export const FETCH_API_OBJECT = 'FETCH_API_OBJECT';
 export const POST_API = 'POST_API';
 export const TEST_API = 'TEST_API';
 export const IS_LOADING = 'IS_LOADING';

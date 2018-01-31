@@ -42,21 +42,30 @@ export const loadIsLoading = bool => ({
  *
  */
 
+const fetchApiArray = dataArray => ({
+  type: types.FETCH_API_ARRAY,
+  dataArray,
+});
 
-const fetchApi = value => ({
-  type: types.FETCH_API,
-  payload: value,
+const fetchApiObject = dataObject => ({
+  type: types.FETCH_API_OBJECT,
+  dataObject,
 });
 
 export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
-  console.log(res);
+  // console.log(res);
   dispatch(loadIsLoading(true));
   if (res.status === 200) {
-    dispatch(fetchApi(res.data));
+    if (res.data.length > 1) {
+      dispatch(fetchApiArray(res.data));
+      return dispatch(loadIsLoading(false));
+    }
+    dispatch(fetchApiObject(res.data));
     return dispatch(loadIsLoading(false));
   }
-  return dispatch(fetchApi({ status: res.errorCode }));
+  dispatch(fetchApiObject({ status: res.errorCode }));
+  return dispatch(fetchApiArray({ status: res.errorCode }));
 };
 
 
@@ -68,7 +77,7 @@ export const loadFetchApi = endpoint => async (dispatch) => {
 
 const postApi = value => ({
   type: types.POST_API,
-  payload: value,
+  dataObject: value,
 });
 
 export const loadPostApi = endpoint => async (dispatch) => {
@@ -93,12 +102,10 @@ export const loadPostApi = endpoint => async (dispatch) => {
  * @param {*} endpoint URL Push -> react router
  */
 
-const createUser = (value, location) => ({
-  type: types.CREATE_USER_API,
-  payload: {
-    res: value,
-    location,
-  },
+const createUser = (dataObject, location) => ({
+  type: types.POST_API,
+  dataObject,
+  location,
 });
 
 export const loadSignUp = value => async (dispatch) => {
@@ -109,7 +116,8 @@ export const loadSignUp = value => async (dispatch) => {
       _error: 'Cek pengisian email.',
     });
   }
-  return dispatch(createUser(res, '/login'));
+  // return dispatch(createUser(res, '/login'));
+  return dispatch(createUser(Object.assign({ res }, { location: '/login' })));
 };
 
 /**
@@ -126,7 +134,7 @@ const loginUser = value => ({
 export const loadLogin = value => async (dispatch) => {
   const res = await api.postLoginUser(value);
   const { token, rows } = res.data;
-
+  console.log(res);
   if (res.status === 200) {
     const { email, username } = rows[0];
     tokenAuth.setCookies(token, { email, username });

@@ -5,7 +5,7 @@ import { DashboardComponent } from './lib';
 
 class UserListComponent extends Component {
   render() {
-    const { data } = this.props;
+    const { dataArray } = this.props;
     // console.log(this.props);
     return (
       <DashboardComponent>
@@ -34,7 +34,7 @@ class UserListComponent extends Component {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, i) => (
+                {dataArray.map((item, i) => (
                   <tr key={item.user_id}>
                     <td>{i + 1}</td>
                     <td className="text-capitalize">{item.username}</td>

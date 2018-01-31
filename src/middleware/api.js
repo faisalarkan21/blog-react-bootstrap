@@ -35,6 +35,15 @@ const fetchApi = async (endpoint = '', values) => {
 
 /**
  *
+ * @param postApi-> dynamic post api scheme
+ */
+
+const postApi = async (values) => {
+  console.log(values);
+};
+
+/**
+ *
  * @param postCreateUser -> Making new User.
  */
 
@@ -82,5 +91,5 @@ const postLoginUser = async (values) => {
 };
 
 
-export { showResults, fetchApi, postCreateUser, postLoginUser };
+export { showResults, fetchApi, postApi, postCreateUser, postLoginUser };
 
