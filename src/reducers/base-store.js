@@ -1,15 +1,16 @@
 import * as types from '../constants/ActionTypes';
 
 
-const callApi = (state = { dataArray: [], dataObject: {} }, action) => {
-  const { dataArray, dataObject } = action;
-  console.log(dataArray);
+const callApi = (state = { dataArray: [], dataObject: {}, status: null }, action) => {
+  const { dataArray, dataObject, status } = action;
+  console.log(action);
   switch (action.type) {
     case types.FETCH_API:
       return {
         ...state,
         dataArray,
         dataObject,
+        status,
       };
     case types.POST_API:
       return {

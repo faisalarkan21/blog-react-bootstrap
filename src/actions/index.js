@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form';
 import { tokenAuth } from '../middleware/auth-cookies';
 import * as api from '../middleware/api';
 import * as types from '../constants/ActionTypes';
+import * as helper from '../middleware/helper';
 
 
 /**
@@ -42,26 +43,42 @@ export const loadIsLoading = bool => ({
  *
  */
 
-const fetchApi = (dataArray, dataObject) => ({
+const fetchApi = (dataArray, dataObject, status) => ({
   type: types.FETCH_API,
   dataArray,
   dataObject,
+  status,
 });
 
 
 export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
-  // console.log(res);
+
   dispatch(loadIsLoading(true));
-  if (res.status === 200) {
-    if (res.data.length > 1) {
-      dispatch(fetchApi(res.data, {}));
-      return dispatch(loadIsLoading(false));
-    }
-    dispatch(fetchApi([], res.data));
-    return dispatch(loadIsLoading(false));
+  if (res.errorCode === 500) {
+    /**
+     * @throws if error occurred
+     */
+    dispatch(fetchApi([], {}, res.errorCode));
+  } else if (Array.isArray(res.data) && res.data.length !== 0) {
+    /**
+     * @type if response is array  object data
+     */
+    dispatch(fetchApi(res.data, {}, 200));
+  } else if (res.data.length !== 0) {
+    /**
+     * @type if response is single object data
+     */
+    dispatch(fetchApi([], res.data, 200));
+  } else {
+    dispatch(fetchApi([], {}, 404));
   }
-  return dispatch(fetchApi({ status: res.errorCode }));
+
+  /**
+   * @default loadIsLoading will dispatch in the end,
+   * meaning redux has received data.
+   */
+  return dispatch(loadIsLoading(false));
 };
 
 

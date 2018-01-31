@@ -15,43 +15,34 @@ class UserList extends Component {
   }
 
   componentDidMount() {
-    this.props.loadIsLoading(true);
-    this.props.loadFetchApi('/users');
+    this.handleFetch();
   }
-  // componentDidCatch(error, info) {
-  //   console.log(error);
-  //   console.log(info);
-  // }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
 
   handleFetch() {
-
+    this.props.loadFetchApi('/users');
   }
 
 
   render() {
     const { isLoading, result } = this.props;
-    // console.log(isLoading);
-    console.log(this.props);
-    // console.log(typeof result.data);
+
+    let renderComponent = null;
+
     if (isLoading === true) {
       return null;
+    } else if (result.status === 500) {
+      renderComponent = <ErrorPage />;
+    } else if (result.status === 404) {
+      renderComponent = <DataEmpty />;
+    } else {
+      renderComponent =
+        <UserListComponent {...result} handleRefresh={this.handleFetch} />;
     }
-
-
-    // if (result.data.status === 500) {
-    //   return <ErrorPage />;
-    // }
-
 
     return (
       <div>
         <DashboardLayout>
-          <UserListComponent {...result} handleRefresh={this.handleFetch} />
+          {renderComponent}
         </DashboardLayout>
       </div>
 
