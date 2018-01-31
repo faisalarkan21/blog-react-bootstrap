@@ -55,6 +55,7 @@ export const loadFetchApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
 
   dispatch(loadIsLoading(true));
+
   if (res.errorCode === 500) {
     /**
      * @throws if error occurred
@@ -65,12 +66,16 @@ export const loadFetchApi = endpoint => async (dispatch) => {
      * @type if response is array  object data
      */
     dispatch(fetchApi(res.data, {}, 200));
-  } else if (res.data.length !== 0) {
+  } else if (res.data.length !== 0 && res.data !== '') {
     /**
      * @type if response is single object data
      */
     dispatch(fetchApi([], res.data, 200));
   } else {
+    /**
+     * @function 404 if response was blank
+     */
+
     dispatch(fetchApi([], {}, 404));
   }
 
