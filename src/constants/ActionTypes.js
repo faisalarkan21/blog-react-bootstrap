@@ -1,5 +1,6 @@
 export const FETCH_API = 'FETCH_API';
 export const POST_API = 'POST_API';
+export const UNLOADED_DATA = 'UNLOADED_DATA';
 export const TEST_API = 'TEST_API';
 export const IS_LOADING = 'IS_LOADING';
 export const CREATE_USER_API = 'CREATE_USER_API';

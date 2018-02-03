@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
 import { ErrorPage, DataEmpty, ReapopSnackBar } from '../../components/lib';
-import { loadPostApi, loadFetchApi, loadIsLoading } from '../../actions';
+import { loadPostApi, loadFetchApi, loadIsLoading, loadUnloadedData } from '../../actions';
 
 @connect(mapStateToProps, {
-  loadPostApi, loadFetchApi, loadIsLoading,
+  loadPostApi, loadFetchApi, loadIsLoading, loadUnloadedData,
 })
 class DetailUser extends React.Component {
   constructor(props) {
@@ -24,6 +24,10 @@ class DetailUser extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
+  }
+
+  componentWillUnmount() {
+    this.props.loadUnloadedData();
   }
 
   handleSubmit(value) {

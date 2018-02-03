@@ -1,6 +1,10 @@
 import * as types from '../constants/ActionTypes';
 
 
+const initApi = {
+  dataArray: [], dataObject: {}, status: null,
+};
+
 const callApi = (state = { dataArray: [], dataObject: {}, status: null }, action) => {
   const { dataArray, dataObject, status } = action;
   console.log(action);
@@ -17,6 +21,9 @@ const callApi = (state = { dataArray: [], dataObject: {}, status: null }, action
         ...state,
         dataObject,
       };
+    case types.UNLOADED_DATA:
+      return initApi;
+
     default:
       return state;
   }

@@ -24,7 +24,8 @@ const Message = {
 
 export const messageTypes = (key, customMessage) => {
   const result = Message[key];
-  result.dismissAfter = 1000;
+  result.dismissAfter = 1500;
+
   if (customMessage) {
     result.message = customMessage;
   }

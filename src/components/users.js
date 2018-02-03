@@ -20,9 +20,9 @@ class UserListComponent extends Component {
             </Button>
           </Col>
           <Col md={12}>
-          
+
             <br />
-            <Table align="right" responsive>
+            <Table className="table-striped" align="right" responsive>
               <thead>
                 <tr>
                   <th>#</th>
@@ -40,7 +40,14 @@ class UserListComponent extends Component {
                     <td className="text-capitalize">{item.username}</td>
                     <td>{item.email}</td>
                     <td>{item.created_on}</td>
-                    <td>{item.role_id}</td>
+                    <td>
+                      <span
+                        className={`label label-${item.role_id === 'Administrator' ?
+                      'danger' : 'success'}`}
+                      >
+                        {item.role_id}
+                      </span>
+                    </td>
                     <td>
                       <LinkContainer to={`/dashboard/user/${item.user_id}`}>
                         <Button bsStyle="primary">Detail</Button>

@@ -114,6 +114,11 @@ export const loadPostApi = (endpoint, value) => async (dispatch) => {
   return dispatch(notify(helper.messageTypes('error')));
 };
 
+export const loadUnloadedData = value => ({
+  type: types.UNLOADED_DATA,
+  dataObject: value,
+});
+
 
 /**
  * @description
@@ -164,7 +169,10 @@ export const loadLogin = (endpoint, value) => async (dispatch) => {
   if (res.status === 200) {
     const { email, username } = rows[0];
     tokenAuth.setCookies(token, { email, username });
-    return dispatch(loginUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken, location: '/dashboard' }));
+    return dispatch(loginUser({
+      isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken,
+      location: '/dashboard',
+    }));
   }
 
   throw new SubmissionError({
@@ -207,5 +215,8 @@ const logOutUser = value => ({
 
 export const loadLogOut = () => (dispatch) => {
   tokenAuth.eraseCookies();
-  dispatch(logOutUser({ isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken, location: '/login' }));
+  dispatch(logOutUser({
+    isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken,
+    location: '/login',
+  }));
 };
