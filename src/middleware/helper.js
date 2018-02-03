@@ -4,3 +4,18 @@ export const isEmpty = (prop) => {
   return result;
 };
 
+export const Message = {
+
+  success: {
+    title: 'Pesan',
+    message: 'Data Berhasil Disimpan',
+    status: 'success',
+  },
+  error: {
+    title: 'Pesan',
+    message: 'Penyimpanan Data Gagal',
+    status: 'error',
+  },
+
+};
+

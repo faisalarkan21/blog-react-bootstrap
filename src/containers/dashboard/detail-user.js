@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import NotificationsSystem, { notify } from 'reapop';
+import theme from 'reapop-theme-wybo';
 
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
-import { ErrorPage, DataEmpty } from '../../components/lib';
+import { ErrorPage, DataEmpty, ReapopSnackBar } from '../../components/lib';
 import { loadPostApi, loadFetchApi, loadIsLoading } from '../../actions';
 
-@connect(mapStateToProps, { loadPostApi, loadFetchApi, loadIsLoading })
+@connect(mapStateToProps, {
+  loadPostApi, loadFetchApi, loadIsLoading, notify,
+})
 class DetailUser extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +23,13 @@ class DetailUser extends React.Component {
     this.props.loadFetchApi(`/users/${params.user_id}`);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
 
   handleSubmit(value) {
-    console.log(value);
+    const { match } = this.props;
+    this.props.loadPostApi(`/users/update/${match.params.user_id}`, value);
   }
 
 
@@ -44,7 +52,9 @@ class DetailUser extends React.Component {
 
     return (
       <div>
+
         <DashboardLayout>
+          <ReapopSnackBar />
           {renderComponent}
         </DashboardLayout>
       </div>

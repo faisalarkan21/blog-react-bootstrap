@@ -45,7 +45,6 @@ class DetailUser extends Component {
       handleSubmit, handleUpdate,
     } = this.props;
 
-    // console.log(this.props);
 
     return (
       <DashboardComponent>
@@ -75,7 +74,7 @@ class DetailUser extends Component {
                   label="Nama Pengguna"
                   placeholder="Nama Anda"
                   validate={required}
-                  readOnly
+
                 />
 
 
@@ -87,7 +86,7 @@ class DetailUser extends Component {
                   label="Email"
                   placeholder="Email anda.."
                   validate={[required, email]}
-                  readOnly
+
                 />
 
                 <Field
@@ -139,11 +138,7 @@ class DetailUser extends Component {
 
 
             </Col>
-            <ShowAlert
-              status={(this.props.error === undefined
-            && this.props.submitSucceeded)
-            || this.props.error}
-            />
+
           </form>
         </Col>
       </DashboardComponent>
@@ -154,6 +149,7 @@ class DetailUser extends Component {
 
 export default reduxForm({
   form: 'formDetailUser',
+
   // enableReinitialize: true,
 })(DetailUser);
 

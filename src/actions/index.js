@@ -1,10 +1,10 @@
 import { SubmissionError } from 'redux-form';
+import { notify } from 'reapop';
 // import Cookies from 'js-cookie';
 import { tokenAuth } from '../middleware/auth-cookies';
 import * as api from '../middleware/api';
 import * as types from '../constants/ActionTypes';
 import * as helper from '../middleware/helper';
-
 
 /**
  *  Test API
@@ -98,12 +98,13 @@ const postApi = value => ({
   dataObject: value,
 });
 
-export const loadPostApi = endpoint => async (dispatch) => {
-  const res = await api.postApi(endpoint);
-  if (res.errorCode === 500) {
-    return dispatch(postApi({ status: res.errorCode }));
+export const loadPostApi = (endpoint, value) => async (dispatch) => {
+  const res = await api.postApi(endpoint, value);
+  console.log(res);
+  if (res.status === 200) {
+    return dispatch(notify(helper.Message.success));
   }
-  return dispatch(postApi(res.data));
+  return dispatch(notify(helper.Message.error));
 };
 
 
