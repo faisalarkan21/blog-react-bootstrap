@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NotificationsSystem, { notify } from 'reapop';
-import theme from 'reapop-theme-wybo';
+
 
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
@@ -9,7 +8,7 @@ import { ErrorPage, DataEmpty, ReapopSnackBar } from '../../components/lib';
 import { loadPostApi, loadFetchApi, loadIsLoading } from '../../actions';
 
 @connect(mapStateToProps, {
-  loadPostApi, loadFetchApi, loadIsLoading, notify,
+  loadPostApi, loadFetchApi, loadIsLoading,
 })
 class DetailUser extends React.Component {
   constructor(props) {
@@ -54,7 +53,6 @@ class DetailUser extends React.Component {
       <div>
 
         <DashboardLayout>
-          <ReapopSnackBar />
           {renderComponent}
         </DashboardLayout>
       </div>

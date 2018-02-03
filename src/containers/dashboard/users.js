@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DashboardLayout from './dashboard-layout';
-
 import { ErrorPage, DataEmpty } from '../../components/lib';
 import { momentFormat } from '../../middleware/moment-config';
 import UserListComponent from '../../components/users';

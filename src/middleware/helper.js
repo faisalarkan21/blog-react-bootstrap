@@ -4,8 +4,7 @@ export const isEmpty = (prop) => {
   return result;
 };
 
-export const Message = {
-
+const Message = {
   success: {
     title: 'Pesan',
     message: 'Data Berhasil Disimpan',
@@ -16,6 +15,19 @@ export const Message = {
     message: 'Penyimpanan Data Gagal',
     status: 'error',
   },
+  info: {
+    title: 'Pesan',
+    message: 'Penyimpanan Data Gagal',
+    status: 'info',
+  },
+};
 
+export const messageTypes = (key, customMessage) => {
+  const result = Message[key];
+  result.dismissAfter = 1000;
+  if (customMessage) {
+    result.message = customMessage;
+  }
+  return result;
 };
 

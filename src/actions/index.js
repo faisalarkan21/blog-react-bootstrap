@@ -63,8 +63,12 @@ export const loadFetchApi = endpoint => async (dispatch) => {
     dispatch(fetchApi([], {}, res.errorCode));
   } else if (Array.isArray(res.data) && res.data.length !== 0) {
     /**
-     * @type if response is array  object data
+     * @type if response is array object data
      */
+    dispatch(notify(helper.messageTypes(
+      'info',
+      `Terdapat Total ${res.data.length} Pengguna`,
+    )));
     dispatch(fetchApi(res.data, {}, 200));
   } else if (res.data.length !== 0 && res.data !== '') {
     /**
@@ -100,11 +104,13 @@ const postApi = value => ({
 
 export const loadPostApi = (endpoint, value) => async (dispatch) => {
   const res = await api.postApi(endpoint, value);
-  console.log(res);
+
   if (res.status === 200) {
-    return dispatch(notify(helper.Message.success));
+    dispatch(postApi(res.data));
+    return dispatch(notify(helper.messageTypes('success')));
   }
-  return dispatch(notify(helper.Message.error));
+  dispatch(postApi(res));
+  return dispatch(notify(helper.messageTypes('error')));
 };
 
 
