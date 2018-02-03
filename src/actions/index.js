@@ -107,7 +107,8 @@ export const loadPostApi = (endpoint, value) => async (dispatch) => {
 
   if (res.status === 200) {
     dispatch(postApi(res.data));
-    return dispatch(notify(helper.messageTypes('success')));
+    dispatch(notify(helper.messageTypes('success')));
+    return dispatch(loadFetchApi(`/users/${res.data.user_id}`));
   }
   dispatch(postApi(res));
   return dispatch(notify(helper.messageTypes('error')));

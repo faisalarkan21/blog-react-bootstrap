@@ -36,6 +36,7 @@ class DetailUser extends Component {
         grant_date: dataObject.grant_date,
         created_on: dataObject.created_on,
         last_login: dataObject.last_login,
+        last_modified: dataObject.last_modified,
       }, { keepDirty: true },
     ));
   }
@@ -102,11 +103,20 @@ class DetailUser extends Component {
               </Col>
               <Col mdOffset={1} xs={5} sm={5} md={5} lg={5}>
                 <Field
-                  name="grant_date"
+                  name="last_login"
                   icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
                   component={FieldInput}
                   type="text"
-                  label="Diberikan Akses Tanggal"
+                  label="Terakhir Login"
+                  placeholder="Terakhir login"
+                  readOnly
+                />
+                <Field
+                  name="last_modified"
+                  icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
+                  component={FieldInput}
+                  type="text"
+                  label="Terakhir Diperbaharui"
                   placeholder="Akses tanggal"
                   readOnly
 
@@ -120,17 +130,6 @@ class DetailUser extends Component {
                   type="text"
                   label="Akun Dibuat Tanggal"
                   placeholder="Dibuat Tanggal"
-                  readOnly
-
-                />
-
-                <Field
-                  name="last_login"
-                  icon={<i className="fa fa-clock-o fa-lg pull-right" aria-hidden="true" />}
-                  component={FieldInput}
-                  type="text"
-                  label="Terakhir Login"
-                  placeholder="Terakhir login"
                   readOnly
 
                 />
