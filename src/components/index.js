@@ -13,11 +13,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props);
     const {
       testApi, dataResponse,
     } = this.props;
-    console.log(dataResponse);
+
     return (
       <div>
         <Col id="post-panel" xs={5} md={5} lg={5}>

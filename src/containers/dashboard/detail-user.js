@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import DashboardLayout from './dashboard-layout';
 import DetailUserComponent from '../../components/detail-user';
 import { ErrorPage, DataEmpty, ReapopSnackBar } from '../../components/lib';
-import { loadPostApi, loadFetchApi, loadIsLoading, loadUnloadedData } from '../../actions';
+import { loadPostApi, loadGetUser, loadIsLoading, loadUnloadedData } from '../../actions';
 
 @connect(mapStateToProps, {
-  loadPostApi, loadFetchApi, loadIsLoading, loadUnloadedData,
+  loadPostApi, loadGetUser, loadIsLoading, loadUnloadedData,
 })
 class DetailUser extends React.Component {
   constructor(props) {
@@ -18,46 +18,24 @@ class DetailUser extends React.Component {
 
   componentWillMount() {
     const { params } = this.props.match;
-    console.log(params);
-    this.props.loadFetchApi(`/users/${params.user_id}`);
+    this.props.loadGetUser(`/users/${params.user_id}`);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
-  componentWillUnmount() {
-    this.props.loadUnloadedData();
-  }
 
   handleSubmit(value) {
     const { match } = this.props;
-    this.props.loadPostApi(`/users/update/${match.params.user_id}`, value);
+    return this.props.loadPostApi(`/users/update/${match.params.user_id}`, value);
   }
 
 
   render() {
-    const { isLoading, result } = this.props;
-    console.log(this.props);
-
-    let renderComponent = null;
-
-    if (isLoading) {
-      return null;
-    } else if (result.status === 500) {
-      renderComponent = <ErrorPage />;
-    } else if (result.status === 404) {
-      renderComponent = <DataEmpty />;
-    } else {
-      renderComponent =
-        <DetailUserComponent handleUpdate={this.handleSubmit} {...result} />;
-    }
+    const { result } = this.props;
 
     return (
       <div>
 
         <DashboardLayout>
-          {renderComponent}
+          <DetailUserComponent handleUpdate={this.handleSubmit} {...result} />;
         </DashboardLayout>
       </div>
 

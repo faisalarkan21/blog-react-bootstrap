@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { notify } from 'reapop';
 
-import { loadLogOut, loadCheckAuth } from '../../actions';
-import { ReapopSnackBar } from '../../components/lib';
+
+import { loadLogOut, loadCheckAuth, loadIsFetchError } from '../../actions';
+import { ReapopSnackBar, ErrorPage, DataEmpty } from '../../components/lib';
 import NavBarContainer from '../navbar-container';
 
-@connect(mapStateToProps, { loadLogOut, loadCheckAuth, notify })
+@connect(mapStateToProps, {
+  loadLogOut, loadCheckAuth, notify, loadIsFetchError,
+})
 @withRouter
 class DashboardLayout extends Component {
   constructor(props) {
@@ -17,17 +20,36 @@ class DashboardLayout extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { result } = nextProps;
+    console.log(this.props);
     if (!result.isLoginAuthenticated) {
       this.props.history.push(result.location);
     }
   }
 
+  componentWillUnmount() {
+    this.props.loadIsFetchError(null);
+  }
+
   render() {
+    const { isLoading, errorCode } = this.props;
+
+    let renderComponent = null;
+
+    if (isLoading === true) {
+      return null;
+    } else if (errorCode === 500) {
+      renderComponent = <ErrorPage />;
+    } else if (errorCode === 404) {
+      renderComponent = <DataEmpty />;
+    } else {
+      renderComponent = this.props.children;
+    }
+
     return (
       <div>
         <NavBarContainer />
         <ReapopSnackBar />
-        {this.props.children}
+        {renderComponent}
       </div>
     );
   }
@@ -36,6 +58,8 @@ class DashboardLayout extends Component {
 function mapStateToProps(state) {
   return {
     result: state.loginAuth,
+    errorCode: state.fetchError,
+    isLoading: state.isLoading,
   };
 }
 

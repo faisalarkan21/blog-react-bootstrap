@@ -2,28 +2,42 @@ import * as types from '../constants/ActionTypes';
 
 
 const initApi = {
-  dataArray: [], dataObject: {}, status: null,
+  users: [],
+  user: {},
+  status: null,
+  homeData: {
+    resultLastLogin: [],
+    resultStatUsers: {},
+  },
 };
 
-const callApi = (state = { dataArray: [], dataObject: {}, status: null }, action) => {
-  const { dataArray, dataObject, status } = action;
-  console.log(action);
+const callApi = (state = initApi, action) => {
+  // console.log(action);
   switch (action.type) {
-    case types.FETCH_API:
+    case types.FETCH_GET_USERS:
       return {
         ...state,
-        dataArray,
-        dataObject,
-        status,
+        users: action.users,
+        status: action.status,
+      };
+    case types.FETCH_GET_USER:
+      return {
+        ...state,
+        user: action.user,
+        status: action.status,
+      };
+    case types.FETCH_GET_HOME_DATA:
+      return {
+        ...state,
+        homeData: action.homeData,
+        status: action.status,
       };
     case types.POST_API:
       return {
         ...state,
-        dataObject,
+        status: action.status,
+        user: action.user,
       };
-    case types.UNLOADED_DATA:
-      return initApi;
-
     default:
       return state;
   }
@@ -34,6 +48,16 @@ const isLoading = (state = false, action) => {
   switch (action.type) {
     case types.IS_LOADING:
       return action.payload;
+    default:
+      return state;
+  }
+};
+
+const fetchError = (state = null, action) => {
+  console.log(action);
+  switch (action.type) {
+    case types.FETCH_ERROR:
+      return action.errorCode;
     default:
       return state;
   }
@@ -88,4 +112,5 @@ export {
   loginAuth,
   testApi,
   isLoading,
+  fetchError,
 };

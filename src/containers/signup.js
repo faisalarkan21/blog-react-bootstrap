@@ -24,10 +24,10 @@ class SignUp extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { result } = nextProps;
-    console.log(result);
+    const { user } = nextProps.result;
+
     setTimeout(() => {
-      this.props.history.push(result.dataObject.location);
+      this.props.history.push(user.toLocation);
     }, 3000);
   }
 

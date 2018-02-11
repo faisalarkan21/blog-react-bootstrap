@@ -11,7 +11,8 @@ const logger = createLogger({
 /* eslint-disable no-underscore-dangle */
 const configureStore = createStore(
   rootReducers,
-  applyMiddleware(thunk, logger),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk),
 
 );
 

@@ -4,9 +4,9 @@ import DashboardLayout from './dashboard-layout';
 import { ErrorPage, DataEmpty } from '../../components/lib';
 import { momentFormat } from '../../middleware/moment-config';
 import UserListComponent from '../../components/users';
-import { loadFetchApi, loadIsLoading } from '../../actions';
+import { loadGetUsers, loadIsLoading } from '../../actions';
 
-@connect(mapStateToProps, { loadFetchApi, loadIsLoading })
+@connect(mapStateToProps, { loadGetUsers, loadIsLoading })
 class UserList extends Component {
   constructor(props) {
     super(props);
@@ -18,30 +18,17 @@ class UserList extends Component {
   }
 
   handleFetch() {
-    this.props.loadFetchApi('/users');
+    this.props.loadGetUsers();
   }
 
 
   render() {
-    const { isLoading, result } = this.props;
-
-    let renderComponent = null;
-
-    if (isLoading === true) {
-      return null;
-    } else if (result.status === 500) {
-      renderComponent = <ErrorPage />;
-    } else if (result.status === 404) {
-      renderComponent = <DataEmpty />;
-    } else {
-      renderComponent =
-        <UserListComponent {...result} handleRefresh={this.handleFetch} />;
-    }
+    const { result } = this.props;
 
     return (
       <div>
         <DashboardLayout>
-          {renderComponent}
+          <UserListComponent {...result} handleRefresh={this.handleFetch} />;
         </DashboardLayout>
       </div>
 

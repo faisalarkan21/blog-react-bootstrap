@@ -1,6 +1,6 @@
 import { SubmissionError } from 'redux-form';
 import { notify } from 'reapop';
-// import Cookies from 'js-cookie';
+
 import { tokenAuth } from '../middleware/auth-cookies';
 import * as api from '../middleware/api';
 import * as types from '../constants/ActionTypes';
@@ -38,86 +38,105 @@ export const loadIsLoading = bool => ({
 });
 
 /**
+ *  Action fetch if error occurred
+ * @param {*} bool loading parameter true or false
+ *
+ */
+
+export const loadIsFetchError = errorCode => ({
+  type: types.FETCH_ERROR,
+  errorCode,
+});
+
+
+/**
  *  Fetch API
  * @param {*} value response api
  *
  */
 
-const fetchApi = (dataArray, dataObject, status) => ({
-  type: types.FETCH_API,
-  dataArray,
-  dataObject,
+const fetchApiUsers = (users, status) => ({
+  type: types.FETCH_GET_USERS,
+  users,
   status,
 });
 
 
-export const loadFetchApi = endpoint => async (dispatch) => {
-  const res = await api.fetchApi(endpoint);
+export const loadGetUsers = () => async (dispatch) => {
+  const res = await api.fetchApi('/users');
 
-  dispatch(loadIsLoading(true));
-
-  if (res.errorCode === 500) {
-    /**
-     * @throws if error occurred
-     */
-    dispatch(fetchApi([], {}, res.errorCode));
-  } else if (Array.isArray(res.data) && res.data.length !== 0) {
-    /**
-     * @type if response is array object data
-     */
+  if (res.status === 200) {
+    dispatch(fetchApiUsers(res.data));
     dispatch(notify(helper.messageTypes(
       'info',
       `Terdapat Total ${res.data.length} Pengguna`,
     )));
-    dispatch(fetchApi(res.data, {}, 200));
-  } else if (res.data.length !== 0 && res.data !== '') {
-    /**
-     * @type if response is single object data
-     */
-    dispatch(fetchApi([], res.data, 200));
+  } else if (res.status === 404) {
+    dispatch(loadIsFetchError(404));
   } else {
-    /**
-     * @function 404 if response was blank
-     */
-
-    dispatch(fetchApi([], {}, 404));
+    dispatch(loadIsFetchError(500));
   }
+  dispatch(loadIsLoading(false));
+};
 
-  /**
-   * @default loadIsLoading will dispatch in the end,
-   * meaning redux has received data.
-   */
-  return dispatch(loadIsLoading(false));
+const fetchApiUser = (user, status) => ({
+  type: types.FETCH_GET_USER,
+  user,
+  status,
+});
+
+export const loadGetUser = endpoint => async (dispatch) => {
+  const res = await api.fetchApi(endpoint);
+  dispatch(loadIsLoading(true));
+  if (res.status === 200) {
+    dispatch(fetchApiUser(res.data, res.status));
+  } else if (res.status === 404) {
+    dispatch(loadIsFetchError(404));
+  } else {
+    dispatch(loadIsFetchError(500));
+  }
+  dispatch(loadIsLoading(false));
 };
 
 
-/**
- * Post Api
- *
- */
+const fetchApiHome = (homeData, status) => ({
+  type: types.FETCH_GET_HOME_DATA,
+  homeData,
+  status,
+});
+
+export const loadGetHome = () => async (dispatch) => {
+  const res = await api.fetchApi('/users/data/list-stat-users');
+
+  dispatch(loadIsLoading(true));
+  if (res.status === 200) {
+    dispatch(fetchApiHome(res.data));
+  } else if (res.status === 404) {
+    dispatch(loadIsFetchError(404));
+  } else {
+    dispatch(loadIsFetchError(500));
+  }
+  dispatch(loadIsLoading(false));
+};
 
 
-const postApi = value => ({
+const postApi = (user, status) => ({
   type: types.POST_API,
-  dataObject: value,
+  user,
+  status,
 });
 
 export const loadPostApi = (endpoint, value) => async (dispatch) => {
   const res = await api.postApi(endpoint, value);
 
-  if (res.status === 200) {
-    dispatch(postApi(res.data));
-    dispatch(notify(helper.messageTypes('success')));
-    return dispatch(loadFetchApi(`/users/${res.data.user_id}`));
+  if (res.errorCode === 500) {
+    dispatch(notify(helper.messageTypes('error')));
+    return dispatch(postApi({ status: res.errorCode }));
   }
-  dispatch(postApi(res));
-  return dispatch(notify(helper.messageTypes('error')));
+  dispatch(notify(helper.messageTypes('success')));
+  dispatch(loadGetUser(`/users/${res.data.user_id}`));
+  return dispatch(postApi(res.data, res.status));
 };
-
-export const loadUnloadedData = value => ({
-  type: types.UNLOADED_DATA,
-  dataObject: value,
-});
 
 
 /**
@@ -133,11 +152,6 @@ export const loadUnloadedData = value => ({
  * @param {*} endpoint URL Push -> react router
  */
 
-const createUser = (dataObject, location) => ({
-  type: types.POST_API,
-  dataObject,
-  location,
-});
 
 export const loadSignUp = (endpoint, value) => async (dispatch) => {
   const res = await api.postApi(endpoint, value);
@@ -148,7 +162,7 @@ export const loadSignUp = (endpoint, value) => async (dispatch) => {
     });
   }
   // return dispatch(createUser(res, '/login'));
-  return dispatch(createUser(Object.assign({ res }, { location: '/login' })));
+  return dispatch(postApi(Object.assign({ res }, { toLocation: '/login' })));
 };
 
 /**
@@ -164,9 +178,9 @@ const loginUser = value => ({
 
 export const loadLogin = (endpoint, value) => async (dispatch) => {
   const res = await api.postApi(endpoint, value);
-  const { token, rows } = res.data;
-  console.log(res);
+
   if (res.status === 200) {
+    const { token, rows } = res.data;
     const { email, username } = rows[0];
     tokenAuth.setCookies(token, { email, username });
     return dispatch(loginUser({

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { reducer as notificationsReducer } from 'reapop';
 
-import { callApi, loginAuth, testApi, isLoading } from './base-store';
+import { callApi, loginAuth, testApi, isLoading, fetchError } from './base-store';
 
 
 const allReducers = combineReducers({
@@ -11,6 +11,7 @@ const allReducers = combineReducers({
   loginAuth,
   testApi,
   isLoading,
+  fetchError,
   notifications: notificationsReducer(),
 });
 

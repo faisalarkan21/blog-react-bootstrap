@@ -4,8 +4,8 @@ import { DashboardComponent } from './lib';
 
 class Home extends Component {
   render() {
-    const { arrayLastLogin, dataObject } = this.props;
-
+    const { resultLastLogin, resultStatUsers } = this.props.homeData;
+    console.log(this.props);
     return (
       <div>
         <DashboardComponent>
@@ -26,7 +26,7 @@ class Home extends Component {
             <Row>
               <Col md={7}>
                 <ul className="list-group">
-                  {arrayLastLogin.map((item, i) => (
+                  {resultLastLogin.map((item, i) => (
                     <li key={item.user_id} className="list-group-item text-capitalize">
                       {item.username}
                       <span className="badge home-badge">{item.last_login}
@@ -40,19 +40,19 @@ class Home extends Component {
                 <ul className="list-group">
                   <li className="list-group-item text-capitalize">
                     Jumlah Penulis
-                    <span className="badge home-badge">{dataObject.totalwriter}
+                    <span className="badge home-badge">{resultStatUsers.totalwriter}
                       <i className="fa fa-user-circle fa-lg fa-lg pull-left" />
                     </span>
                   </li>
                   <li className="list-group-item text-capitalize">
                     Jumlah Administrator
-                    <span className="badge home-badge">{dataObject.totaladmin}
+                    <span className="badge home-badge">{resultStatUsers.totaladmin}
                       <i className="fa fa-user-circle fa-lg fa-lg pull-left" />
                     </span>
                   </li>
                   <li className="list-group-item text-capitalize">
                     Total Pengguna
-                    <span className="badge home-badge">{dataObject.totaluser}
+                    <span className="badge home-badge">{resultStatUsers.totaluser}
                       <i className="fa fa-user-circle fa-lg fa-lg pull-left" />
                     </span>
                   </li>

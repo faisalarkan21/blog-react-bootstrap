@@ -9,34 +9,23 @@ import { required, email, minLength6, passwordConfirm } from '../middleware/rule
 
 
 class DetailUser extends Component {
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps);
-  //
-  // }
-
-
   componentWillMount() {
     this.handleInitialize();
   }
-  // componentDidMount() {
-  //   this.handleInitialize();
-  // }
 
   handleInitialize() {
-    const { dataObject } = this.props;
-
-    // console.log(data);
+    const { user } = this.props;
 
     this.props.dispatch(initialize(
       'formDetailUser',
       {
-        username: dataObject.username,
-        email: dataObject.email,
-        role_id: dataObject.role_id,
-        grant_date: dataObject.grant_date,
-        created_on: dataObject.created_on,
-        last_login: dataObject.last_login,
-        last_modified: dataObject.last_modified,
+        username: user.username,
+        email: user.email,
+        role_id: user.role_id,
+        grant_date: user.grant_date,
+        created_on: user.created_on,
+        last_login: user.last_login,
+        last_modified: user.last_modified,
       }, { keepDirty: true },
     ));
   }
