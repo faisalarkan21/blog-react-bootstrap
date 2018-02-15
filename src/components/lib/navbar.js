@@ -17,9 +17,31 @@ import { LinkContainer } from 'react-router-bootstrap';
 import RouterLink from 'react-metismenu-router-link';
 
 
-const content = [
+const contentUser = [
+  {
+    icon: 'home',
+    label: 'Dashboard',
+    to: '/dashboard',
+  },
+  {
+    icon: 'newspaper-o',
+    label: 'Daftar Artikel',
+    content: [
+      {
+        icon: 'tag',
+        label: 'Artikel Pemrograman',
+        to: '/dashboard/articles',
+      },
+      {
+        icon: 'tag',
+        label: 'Artikel Motivasi',
+        to: '#another-link',
+      },
+    ],
+  },
+];
 
-
+const contentAdmin = [
   {
     icon: 'home',
     label: 'Dashboard',
@@ -51,12 +73,11 @@ const content = [
 
 const AppNav = class extends Component {
   render() {
-    // console.log(this.props);
-    const { isPublicRoute, dataToken } = this.props;
+    console.log(this.props);
+    const { isPublicRoute, username, role_id } = this.props;
     return (
       <div>
         {isPublicRoute ? (
-
           <Navbar className="navbar navbar-default navbar-fixed-top sidebar-crop">
             <Navbar.Header>
               <Navbar.Brand>
@@ -91,7 +112,7 @@ const AppNav = class extends Component {
                <Dropdown id={`dropdown-basic-${1}`}>
                  <Dropdown.Toggle>
                    <i className="fa fa-cogs pull-left-mod" />
-                   {dataToken.username || null}
+                   {username || null}
                  </Dropdown.Toggle>
                  <Dropdown.Menu className="super-colors">
                    <MenuItem eventKey="1">
@@ -112,7 +133,7 @@ const AppNav = class extends Component {
            </Navbar>
            <MetisMenu
              className="nav-metis nav-inverse"
-             content={content}
+             content={role_id === 1 ? contentAdmin : contentUser}
              LinkComponent={RouterLink}
              activeLinkFromLocation
              iconNameStateHidden="angle-double-left"

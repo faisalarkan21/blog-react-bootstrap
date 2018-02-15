@@ -28,7 +28,7 @@ class NavBarContainer extends React.Component {
   }
 
   render() {
-    console.log(tokenAuth.tokenAuthenticated());
+    console.log(tokenAuth.tokenAuthenticated().dataToken);
     const { dataToken, authToken } = tokenAuth.tokenAuthenticated();
     const { isPublicRoute } = this.props;
     return (
@@ -37,7 +37,7 @@ class NavBarContainer extends React.Component {
         toDashboard={this.handleDashboard}
         logOut={this.handleLogOut}
         isLoginAuthenticated={authToken}
-        dataToken={dataToken}
+        {...dataToken}
       />
     );
   }

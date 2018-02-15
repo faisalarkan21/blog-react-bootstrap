@@ -35,7 +35,7 @@ class App extends React.Component {
           linkDaftar="/daftar"
           linkLogin="/login"
           testApi={this.handleFetchApi}
-          dataResponse={result}
+          {...result}
         />
       </div>
 

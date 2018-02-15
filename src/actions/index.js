@@ -18,8 +18,8 @@ const testApi = value => ({
 
 export const loadTestApi = endpoint => async (dispatch) => {
   const res = await api.fetchApi(endpoint);
-
-  if (res.errorCode === 500) {
+  // console.log(res);
+  if (res.status === 500) {
     return dispatch(testApi({ data: { message: null, database: null } }));
   }
   return dispatch(testApi(res.data));
@@ -178,11 +178,11 @@ const loginUser = value => ({
 
 export const loadLogin = (endpoint, value) => async (dispatch) => {
   const res = await api.postApi(endpoint, value);
-
+  console.log(res);
   if (res.status === 200) {
     const { token, rows } = res.data;
-    const { email, username } = rows[0];
-    tokenAuth.setCookies(token, { email, username });
+    const { email, username, role_id } = rows[0];
+    tokenAuth.setCookies(token, { email, username, role_id });
     return dispatch(loginUser({
       isLoginAuthenticated: tokenAuth.tokenAuthenticated().authToken,
       location: '/dashboard',
