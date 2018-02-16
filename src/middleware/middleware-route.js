@@ -3,11 +3,24 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { tokenAuth } from './auth-cookies';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log({ ...rest });
   const { authToken, dataToken } = tokenAuth.tokenAuthenticated();
   const adminRoute = { ...rest };
 
-  if (adminRoute.roles.length > 1) {
+  console.log({ ...rest });
+  console.log(tokenAuth.tokenAuthenticated());
+
+
+  if (!authToken) {
+    return (<Redirect to={{
+          pathname: '/login',
+          state: {
+            from: rest.path,
+            errorMessage: 'Harap login dahulu.',
+          },
+        }}
+    />
+    );
+  } else if (adminRoute.roles.length > 1) {
     return (
       <Route
         {...rest}
@@ -16,11 +29,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <Component {...propsRender} />
       ) : (
         <Redirect to={{
-          pathname: '/login',
-          state: {
-            from: rest.path,
-            errorMessage: 'Harap login dahulu.',
-          },
+          pathname: '/404',
         }}
         />
       )
@@ -33,18 +42,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={propsRender => (
-        authToken ? (
-          <Component {...propsRender} />
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: {
-          from: rest.path,
-          errorMessage: 'Harap login dahulu.',
-        },
-      }}
-      />
-    )
+        <Component {...propsRender} />
   )}
     />
   );
