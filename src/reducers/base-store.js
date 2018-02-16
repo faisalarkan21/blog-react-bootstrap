@@ -54,7 +54,7 @@ const isLoading = (state = false, action) => {
 };
 
 const fetchError = (state = null, action) => {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case types.FETCH_ERROR:
       return action.errorCode;

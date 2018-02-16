@@ -5,7 +5,7 @@ import { DashboardComponent } from './lib';
 class Home extends Component {
   render() {
     const { resultLastLogin, resultStatUsers } = this.props.homeData;
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <DashboardComponent>

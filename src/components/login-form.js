@@ -20,7 +20,7 @@ const Dashboard = (props) => {
           </h3>
           <hr />
         </div>
-        <Col className="inner-panel" xs={12} sm={9} md={10} lg={9} smOffset={1} lgOffset={1}>
+        <Col xs={12} sm={9} md={10} lg={9} smOffset={1} lgOffset={1}>
           <form className="form-horizontal" onSubmit={handleSubmit(handleLogin)}>
             <Field
               name="email"

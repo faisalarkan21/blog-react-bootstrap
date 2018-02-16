@@ -7,18 +7,11 @@ class DataEmpty extends Component {
     return (
       <div>
         <DashboardComponent>
-          <Col xs={5} md={5} lg={5}>
-            <Panel bsStyle="info">
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">Info</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
-                <h4>Tidak ada data
+          <Col style={{ padding: 50 }} className="panel-well" xs={5} md={5} lg={5}>
+            <h4>Tidak ada data
                 &nbsp;
-                  <i className="fa fa-bug" aria-hidden="true" />
-                </h4>
-              </Panel.Body>
-            </Panel>
+              <i className="fa fa-bug" aria-hidden="true" />
+            </h4>
           </Col>
         </DashboardComponent>
       </div>

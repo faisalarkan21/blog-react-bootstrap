@@ -7,18 +7,11 @@ class ErrorPage extends Component {
     return (
       <div>
         <DashboardComponent>
-          <Col xs={5} md={5} lg={5}>
-            <Panel bsStyle="danger">
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">Terjadi Kesalahan</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
-                <h4>Internal Server Error
+          <Col style={{ padding: 50 }} className="panel-well" xs={5} md={5} lg={5}>
+            <h4>Internal Server Error
                 &nbsp;
-                  <i className="fa fa-bug" aria-hidden="true" />
-                </h4>
-              </Panel.Body>
-            </Panel>
+              <i className="fa fa-bug" aria-hidden="true" />
+            </h4>
           </Col>
         </DashboardComponent>
       </div>
